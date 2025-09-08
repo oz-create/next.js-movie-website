@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google'
+import Providers from "@/lib/providers";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -10,8 +11,8 @@ const lato = Lato({
 });
 
 export const metadata = {
-  title: "Next.js Blog",
-  description: "Next.js ile yapılmış basit bir blog uygulaması",
+  title: "Next.jsMovie Website",
+  description: "Next.js ile yapılmış bir film sitesi",
 };
 
 export default function RootLayout({
@@ -22,9 +23,12 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={`min-h-screen flex flex-col ${lato.className} bg-[#030A1B]`}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <Providers>
+          <Navbar />
+            <main>{children}</main>
+          <Footer />
+        </Providers>
+       
       </body>
     </html>
   );

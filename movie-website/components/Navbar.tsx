@@ -17,7 +17,7 @@ export default function Navbar() {
         alt="logo light"
         className='w-23 h-23'
       />
-      <div className='flex items-center justify-center gap-8'>
+      <div className='flex items-center justify-center gap-8 z-10'>
         <Link href="/" className='text-white text-2xl'>Home</Link>
         <Link href="/pricing" className='text-white text-2xl'>Pricing</Link>
         <Link href="/movies" className='text-white text-2xl'>Movies</Link>
@@ -25,7 +25,7 @@ export default function Navbar() {
         <Link href="/collection" className='text-white text-2xl'>Collection</Link>
         <Link href="/faq" className='text-white text-2xl'>FAQ</Link>
       </div>
-      <div className='flex items-center justify-center gap-8'>
+      <div className='flex items-center justify-center gap-8 z-10'>
         <CiSearch className='text-white w-8 h-8 object-cover'/>
         <IoIosNotifications className='text-white w-8 h-8 object-cover' />
         <FaUser className='text-white w-6 h-6 object-cover' />
