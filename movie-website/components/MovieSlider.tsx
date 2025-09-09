@@ -1,29 +1,34 @@
-import Image from 'next/image'
 import React from 'react'
+import MovieInfo from './MovieInfo'
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
-export default function MovieSlider() {
-    const movies = ["openheimer-poster.png", "the-witcher-poster.png", "movie3.png", "movie4.png"];
+type Movie = {
+  poster_path: string;
+  // add other properties if needed
+};
+
+function MovieSlider() {
+  const { list } = useSelector((state: RootState) => state.movies);
+  const baseUrl = "https://image.tmdb.org/t/p/w500";
   return (
-    <div className='flex items-center'>
-        {
-            movies.map((movie,index) => {
-                return (
-                     <div key={index} className ={`w-30 h-30 rounded-xl overflow-hidden border border-[#006486] mx-[-0.5rem] hover:scale-130`}>
-                        <Image
-                                src={`/${movie}`}
-                                width={120}
-                                height={120}
-                                alt="logo light"
-                                className='w-full h-full object-cover'
-                        />
-                    </div>
-                )
-            })
-        }
-       
-       
+    <div className='px-5'>
+      <div className='bg-[url("/hero-banner.png")] bg-cover bg-center w-full max-w-[90rem] h-[643px] flex items-end justify-between gap-5'>
+          <MovieInfo title="The Witcher" description="Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts." rating={4.5} />
+           <div className='flex items-center gap-[-0.5rem]'>
+              {
+                (list as Movie[]).slice(0,4).map((movie, index) => (
+                  <div className='w-[7.625rem] h-[7.625rem] overflow-hidden rounded-xl border border-[var(--primary-blue)]' key={index}>
+                    <img key={index} src={baseUrl + movie.poster_path} alt="" className='w-full' />
+                  </div>
+                  
+                ))
+              }
+      </div>
+    
+        </div> 
     </div>
   )
 }
 
-//  https://api.themoviedb.org/3/movie/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1
+export default MovieSlider

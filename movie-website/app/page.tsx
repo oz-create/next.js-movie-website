@@ -19,6 +19,8 @@ export default function Home() {
   if (status === "loading") return <p>Yükleniyor...</p>;
   if (status === "failed") return <p>Hata!</p>;
 
+
+
   return (
     <div>
       <FirstSection />

@@ -11,7 +11,7 @@ type MovieInfoProps = {
 
 export default function MovieInfo({title,description,rating} : MovieInfoProps) {
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex flex-col gap-2 '>
         <h1 className='text-white text-5xl font-bold'>{title}</h1>
         <p className='text-white text-base'>{description}</p>
         <div className='flex items-center gap-2'>

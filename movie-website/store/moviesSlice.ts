@@ -11,6 +11,7 @@ export const fetchMovies = createAsyncThunk(
     }
 )
 
+
 type initialStateType = {
   list: object[];  
   status: "idle" | "loading" | "succeeded" | "failed";
