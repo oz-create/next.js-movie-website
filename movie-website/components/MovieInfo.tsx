@@ -16,12 +16,13 @@ export default function MovieInfo({title,description,rating} : MovieInfoProps) {
         <p className='text-white text-base'>{description}</p>
         <div className='flex items-center gap-2'>
           <Rating
-                name="text-feedback"
+                name="customized-10"
                 value={rating}
                 readOnly
                 precision={0.5}
+                max={10}
             />
-            <span className='text-base text-white'>{rating}</span>
+            <span className='text-base text-white'>{rating.toFixed(1)}</span>
         </div>
         
         <div className="flex items-center gap-3">
