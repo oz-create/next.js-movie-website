@@ -29,9 +29,9 @@ export default function Navbar() {
   ];
   return (
     <div className="flex justify-center w-full fixed top-9 z-10">
-      <div className='relative h-20 max-w-7xl w-full flex items-center justify-between inset-0 rounded-2xl gradient-border backdrop-blur-sm pr-5'>
+      <div className='relative h-20 max-w-7xl w-full flex items-center justify-between inset-0 rounded-2xl gradient-border backdrop-blur-sm pr-5 bg-[var(--light-color)]'>
         <Image
-        src="/Logo-light.png"
+        src={`${mode === "dark" ? "/Logo-light.png" : "/Logo-dark.png"}`}
         width={92}
         height={92}
         alt="logo light"
@@ -40,18 +40,18 @@ export default function Navbar() {
       <div className='flex items-center justify-center gap-8 z-10'>
         {
           links.map((link,index) => (
-            <Link key={index} href={link.href} className={`text-white text-2xl relative transition-all ${link.href === pathname ? "after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[4px] after:bg-[var(--primary-blue)] after:blur-[2px]" : ""}`}>{link.label}</Link>
+            <Link key={index} href={link.href} className={`text-[var(--color-primary)] text-2xl relative transition-all ${link.href === pathname ? "after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[4px] after:bg-[var(--primary-blue)] after:blur-[2px]" : ""}`}>{link.label}</Link>
           ))
         }
         
       </div>
       <div className='flex items-center justify-center gap-8 z-10'>
-        <CiSearch className='text-white w-8 h-8 object-cover'/>
-        <IoIosNotifications className='text-white w-8 h-8 object-cover' />
-        <FaUser className='text-white w-6 h-6 object-cover' />
+        <CiSearch className='text-[var(--color-primary)] w-8 h-8 object-cover'/>
+        <IoIosNotifications className='text-[var(--color-primary)] w-8 h-8 object-cover' />
+        <FaUser className='text-[var(--color-primary)] w-6 h-6 object-cover' />
         {
-          mode === "light" ? <IoSunny className='text-white w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} /> :
-          <IoMdMoon className='text-white w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} />
+          mode === "light" ? <IoSunny className='text-[var(--color-primary)] w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} /> :
+          <IoMdMoon className='text-[var(--color-primary)] w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} />
         }
         
       </div>
