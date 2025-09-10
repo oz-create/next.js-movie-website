@@ -1,8 +1,9 @@
 "use client"
 
 import FirstSection from "@/components/FirstSection";
+import MoviesSection from "@/components/MoviesSection";
 import TrendsSection from "@/components/TrendsSection";
-import { fetchMovies } from "@/store/slices/moviesSlice";
+import { fetchCategories, fetchMovies, fetchNowPlayingMovies } from "@/store/slices/moviesSlice";
 import { AppDispatch , RootState} from "@/store/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +15,8 @@ export default function Home() {
   useEffect(() => {
     if (status === "idle") {
      dispatch(fetchMovies());
+     dispatch(fetchCategories());
+     dispatch(fetchNowPlayingMovies());
     }
   }, [status, dispatch]);
 
@@ -26,6 +29,7 @@ export default function Home() {
     <div>
       <FirstSection />
       <TrendsSection />
+      <MoviesSection />
     </div>
   );
 }

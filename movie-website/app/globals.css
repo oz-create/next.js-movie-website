@@ -6,10 +6,12 @@
 :root {
   --color-primary: #030A1B; 
   --primary-blue: #228EE5;
+  --light-color: #EBFAFF;
 }
 
 .dark {
   --color-primary: #EBFAFF; 
+  --light-color: #030A1B;
 }
 
 

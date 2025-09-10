@@ -33,8 +33,8 @@ function MovieSlider() {
   const selectedMovie = movies[selectedIndex];
 
   return (
-    <div className='w-full flex items-center justify-center relative before:content-[""] before:absolute before:w-full before:h-full before:-top-0 before:-left-0 before:-right-0 before:-bottom-0 before:bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_60%,#EBFAFF_100%)] dark:before:bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_60%,#030A1B_100%)]'>
-      <div className=' bg-cover bg-top w-full h-[800px] flex items-end justify-between gap-10 p-10 transition-all'
+    <div className='w-full flex items-center justify-center relative'>
+      <div className='bg-cover bg-top w-full h-[800px] flex items-end justify-between gap-10 p-10 transition-all before:content-[""] before:absolute before:w-full before:h-[20rem] before:-bottom-0 before:-left-0 before:-right-0 before:bg-gradient-to-t before:from-[var(--light-color)] before:to-transparent'
       style={{
           backgroundImage: selectedMovie?.backdrop_path
             ? `url(${baseUrl + selectedMovie.backdrop_path})`

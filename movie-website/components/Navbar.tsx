@@ -50,8 +50,8 @@ export default function Navbar() {
         <IoIosNotifications className='text-white w-8 h-8 object-cover' />
         <FaUser className='text-white w-6 h-6 object-cover' />
         {
-          mode === "light" ? <IoSunny className='text-white w-8 h-8 object-cover' onClick={() => dispatch(toggleTheme())} /> :
-          <IoMdMoon className='text-white w-8 h-8 object-cover' onClick={() => dispatch(toggleTheme())} />
+          mode === "light" ? <IoSunny className='text-white w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} /> :
+          <IoMdMoon className='text-white w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} />
         }
         
       </div>
