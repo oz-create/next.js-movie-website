@@ -14,7 +14,7 @@ type Movie = {
 
 function MovieSlider() {
   const { list } = useSelector((state: RootState) => state.movies);
-  const baseUrl = "https://image.tmdb.org/t/p/w500";
+  const baseUrl = "https://image.tmdb.org/t/p/original";
 
   const movies = (list as Movie[]).slice(0, 4); // ilk 4 film
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -33,15 +33,15 @@ function MovieSlider() {
   const selectedMovie = movies[selectedIndex];
 
   return (
-    <div className='w-full flex items-center justify-center'>
-      <div className=' bg-cover bg-center w-full h-[643px] flex items-end justify-between gap-10 px-10 transition-all'
+    <div className='w-full flex items-center justify-center relative before:content-[""] before:absolute before:w-full before:h-full before:-top-0 before:-left-0 before:-right-0 before:-bottom-0 before:bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_60%,#EBFAFF_100%)] dark:before:bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_60%,#030A1B_100%)]'>
+      <div className=' bg-cover bg-top w-full h-[800px] flex items-end justify-between gap-10 p-10 transition-all'
       style={{
           backgroundImage: selectedMovie?.backdrop_path
             ? `url(${baseUrl + selectedMovie.backdrop_path})`
             : 'none',
         }}>
           <MovieInfo title={selectedMovie?.title || ""} description={selectedMovie?.overview || ""} rating={selectedMovie?.vote_average || 0} />
-           <div className='flex items-center'>
+           <div className='flex items-center relative z-1'>
               {
                 (list as Movie[]).slice(0,4).map((movie, index) => (
                   <div className={`w-[7.625rem] h-[7.625rem] cursor-pointer transition overflow-hidden rounded-xl border border-[var(--primary-blue)] mx-[-0.5rem] ${selectedMovie?.poster_path === movie.poster_path ? "scale-125 z-1" : "scale-100 z-0"}`} key={index} onClick={() => setSelectedIndex(index)}>

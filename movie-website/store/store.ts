@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import moviesReducer from "./slices/moviesSlice";
+import themeReducer from "./slices/themeSlice";
 
 
 export const store = configureStore({
     reducer: {
-        movies: moviesReducer
+        movies: moviesReducer,
+        theme: themeReducer,
     }
 })
 

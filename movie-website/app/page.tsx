@@ -1,6 +1,7 @@
 "use client"
 
 import FirstSection from "@/components/FirstSection";
+import TrendsSection from "@/components/TrendsSection";
 import { fetchMovies } from "@/store/slices/moviesSlice";
 import { AppDispatch , RootState} from "@/store/store";
 import { useEffect } from "react";
@@ -24,6 +25,7 @@ export default function Home() {
   return (
     <div>
       <FirstSection />
+      <TrendsSection />
     </div>
   );
 }

@@ -22,11 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body className={`min-h-screen flex flex-col ${lato.className} bg-[#030A1B]`}>
+      <body className={`min-h-screen flex flex-col ${lato.className}`}>
         <Providers>
-          <Navbar />
-            <main>{children}</main>
-          <Footer />
+          <div className="min-h-screen flex flex-col bg-[#EBFAFF] dark:bg-[#030A1B] ">
+             <Navbar />
+              <main>{children}</main>
+            <Footer />
+          </div>
         </Providers>
        
       </body>

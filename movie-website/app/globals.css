@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
-@theme {
-   --primary-blue: #228EE5;
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-primary: #030A1B; 
+  --primary-blue: #228EE5;
 }
+
+.dark {
+  --color-primary: #EBFAFF; 
+}
+
+
 @layer components {
   .gradient-border::before {
     content: "";
