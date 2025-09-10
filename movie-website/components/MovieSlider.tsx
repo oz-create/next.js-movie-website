@@ -34,7 +34,7 @@ function MovieSlider() {
 
   return (
     <div className='w-full flex items-center justify-center'>
-      <div className=' bg-cover bg-center w-full h-[643px] flex items-end justify-between gap-5 px-10 transition-all'
+      <div className=' bg-cover bg-center w-full h-[643px] flex items-end justify-between gap-10 px-10 transition-all'
       style={{
           backgroundImage: selectedMovie?.backdrop_path
             ? `url(${baseUrl + selectedMovie.backdrop_path})`
