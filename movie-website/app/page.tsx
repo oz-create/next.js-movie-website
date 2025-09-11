@@ -2,8 +2,10 @@
 
 import FirstSection from "@/components/FirstSection";
 import MoviesSection from "@/components/MoviesSection";
+import SeriesSection from "@/components/SeriesSection";
 import TrendsSection from "@/components/TrendsSection";
-import { fetchCategories, fetchMovies, fetchNowPlayingMovies } from "@/store/slices/moviesSlice";
+import UpcomingMoviesSection from "@/components/UpcomingMoviesSection";
+import { fetchMoviesCategories, fetchMovies, fetchNowPlayingMovies, fetchSeries, fetchUpcomingMovies, fetchSeriesCategories } from "@/store/slices/moviesSlice";
 import { AppDispatch , RootState} from "@/store/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,8 +17,11 @@ export default function Home() {
   useEffect(() => {
     if (status === "idle") {
      dispatch(fetchMovies());
-     dispatch(fetchCategories());
+     dispatch(fetchMoviesCategories());
+     dispatch(fetchSeriesCategories());
      dispatch(fetchNowPlayingMovies());
+     dispatch(fetchUpcomingMovies());
+     dispatch(fetchSeries());
     }
   }, [status, dispatch]);
 
@@ -30,6 +35,8 @@ export default function Home() {
       <FirstSection />
       <TrendsSection />
       <MoviesSection />
+      <UpcomingMoviesSection />
+      <SeriesSection />
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function CategorySlider({ data }: { data: any }) {
         {data.map((category: { id: number; name: string }) => (
           <div
             key={category.id}
-            className="py-3 px-5 bg-[#EC5BAA] border border-[#EC5BAA] rounded-full cursor-pointer text-[var(--color-primary)] text-sm flex-shrink-0 hover:bg-transparent transition"
+            className="py-3 px-5 bg-transparent border border-[var(--primary-blue)] rounded-full cursor-pointer text-[var(--color-primary)] text-sm flex-shrink-0 hover:bg-[var(--primary-blue)] transition"
           >
             {category.name}
           </div>
