@@ -21,7 +21,7 @@ export default function TrendsSection() {
         </div>
         <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
-                (list as Movie[]).slice(4,15).map((movie,index) => (
+                (list as Movie[]).map((movie,index) => (
                 <MovieCard key={index} imageUrl={BASE_URL + movie.poster_path} />
                 ))
             }

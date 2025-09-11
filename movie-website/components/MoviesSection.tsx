@@ -9,7 +9,6 @@ import SeeMoreButton from './SeeMoreButton';
 
 export default function MoviesSection() {
   const { moviesCategories, nowPlayingMovies} = useSelector((state: RootState) => state.movies);
-  console.log(nowPlayingMovies)
 
   type Movie = {
     poster_path: string;
@@ -24,7 +23,7 @@ export default function MoviesSection() {
         <CategorySlider data={moviesCategories} />
         <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
-                (nowPlayingMovies as Movie[]).slice(0,15).map((movie,index) => (
+                (nowPlayingMovies as Movie[]).map((movie,index) => (
                   <MovieCard key={index} imageUrl={BASE_URL + movie.poster_path} />
                 ))
             }
