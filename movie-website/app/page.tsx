@@ -2,6 +2,7 @@
 
 import FirstSection from "@/components/FirstSection";
 import MoviesSection from "@/components/MoviesSection";
+import PaymentSection from "@/components/PaymentSection";
 import SeriesSection from "@/components/SeriesSection";
 import TrendsSection from "@/components/TrendsSection";
 import UpcomingMoviesSection from "@/components/UpcomingMoviesSection";
@@ -37,6 +38,7 @@ export default function Home() {
       <MoviesSection />
       <UpcomingMoviesSection />
       <SeriesSection />
+      <PaymentSection />
     </div>
-  );
+  )
 }
