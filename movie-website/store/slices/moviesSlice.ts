@@ -114,16 +114,47 @@ export const fetchUpcomingMovies = createAsyncThunk(
     }
 )
 
-export const fetchSeries = createAsyncThunk(
-    "movies/fetchSeries",
-    async () => {
+// export const fetchSeries = createAsyncThunk(
+//     "movies/fetchSeries",
+//     async () => {
+//         const res = await fetch(
+//         "https://api.themoviedb.org/3/tv/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
+//         );
+//         const data = await res.json();
+//         return data.results;
+//     }
+// )
+
+export const fetchSeriesAndSeasons = createAsyncThunk(
+  "movies/fetchSeriesAndSeasons",
+  async () => {
+    // 1. Popüler dizileri çek
+    const res = await fetch(
+      "https://api.themoviedb.org/3/tv/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
+    );
+    const data = await res.json();
+    const series = data.results;
+
+    // 2. Dizilerin detaylarını çekip seasons bilgilerini al
+    const seriesWithSeasons = await Promise.all(
+      series.map(async (s: { id: number }) => {
         const res = await fetch(
-        "https://api.themoviedb.org/3/tv/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
+          `https://api.themoviedb.org/3/tv/${s.id}?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`
         );
-        const data = await res.json();
-        return data.results;
-    }
-)
+        const detail = await res.json();
+        return {
+          ...s,
+          seasons: detail.seasons, // dizinin tüm sezonları burada
+          number_of_seasons: detail.number_of_seasons,
+          number_of_episodes: detail.number_of_episodes,
+        };
+      })
+    );
+
+    return { series: seriesWithSeasons };
+  }
+);
+
 
 type initialStateType = {
   list: object[]; 
@@ -203,14 +234,14 @@ const moviesSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message ?? "Bir hata oluştu";
       })
-      .addCase(fetchSeries.pending, (state) => {
+      .addCase(fetchSeriesAndSeasons.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchSeries.fulfilled, (state, action) => {
+      .addCase(fetchSeriesAndSeasons.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.series = action.payload;
+        state.series = action.payload.series;
       })
-      .addCase(fetchSeries.rejected, (state, action) => {
+      .addCase(fetchSeriesAndSeasons.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Bir hata oluştu";
       })

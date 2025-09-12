@@ -1,33 +1,53 @@
 import { RootState } from '@/store/store';
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import MovieCard from './MovieCard';
 import { BASE_URL } from '@/config/constants';
 import CollectionCard from './CollectionCard';
 import Link from 'next/link';
+import SwitchButton from './SwitchButton';
 
 
 export default function CollectionSection() {
-    const { collection } = useSelector((state: RootState) => state.movies);
-    console.log(collection);
+    const { collection, series } = useSelector((state: RootState) => state.movies);
+    console.log(series);
 
     type Movie = {
         poster_path: string;
         parts: any;
-        id: number
+        id: number;
+        seasons: any;
     };
+    const [active,setActive] = useState<boolean>(true)
+    const handleSwitch = () => {
+        setActive(!active)
+    }
 
   return (
     <section className='flex flex-col gap-10 mx-10 my-20'>
         <div className="w-full flex items-center justify-between">
-          <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Collection</h1>
-         
+          {
+            active ?
+            <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Collection</h1>
+            :
+            <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Seasons</h1>
+          }
+          
+          <SwitchButton option1='Movies' option2='Series' state={active} switchFunction={handleSwitch}/>
         </div>
         <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
+              active ?
                 (collection as Movie[]).map((movie,index) => (
                   <Link href={`/collection/${movie.id}`} key={index}>
                     <CollectionCard imageUrl={BASE_URL + movie.poster_path} parts={movie.parts}/>
+                  </Link>
+                
+                ))
+             :
+                (series as Movie[]).map((movie,index) => (
+                  <Link href={`/collection/${movie.id}`} key={index}>
+                    <CollectionCard imageUrl={BASE_URL + movie.poster_path} parts={movie.seasons}/>
                   </Link>
                 
                 ))

@@ -7,7 +7,7 @@ import PaymentSection from "@/components/PaymentSection";
 import SeriesSection from "@/components/SeriesSection";
 import TrendsSection from "@/components/TrendsSection";
 import UpcomingMoviesSection from "@/components/UpcomingMoviesSection";
-import { fetchMoviesCategories, fetchNowPlayingMovies, fetchSeries, fetchUpcomingMovies, fetchSeriesCategories, fetchMoviesAndCollections } from "@/store/slices/moviesSlice";
+import { fetchMoviesCategories, fetchNowPlayingMovies, fetchUpcomingMovies, fetchSeriesCategories, fetchMoviesAndCollections, fetchSeriesAndSeasons } from "@/store/slices/moviesSlice";
 import { AppDispatch , RootState} from "@/store/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ export default function Home() {
      dispatch(fetchSeriesCategories());
      dispatch(fetchNowPlayingMovies());
      dispatch(fetchUpcomingMovies());
-     dispatch(fetchSeries());
+     dispatch(fetchSeriesAndSeasons());
      dispatch(fetchMoviesAndCollections());
     //  dispatch(fetchMovies()).then((res: any) => {
     //   res.payload.forEach((movie: any) => {
