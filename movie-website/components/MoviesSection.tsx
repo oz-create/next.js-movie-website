@@ -5,6 +5,7 @@ import { RootState } from '@/store/store';
 import CategorySlider from './CategorySlider';
 import { BASE_URL } from '@/config/constants';
 import SeeMoreButton from './SeeMoreButton';
+import Link from 'next/link';
 
 
 export default function MoviesSection() {
@@ -12,6 +13,7 @@ export default function MoviesSection() {
 
   type Movie = {
     poster_path: string;
+    id: number
   };
 
   return (
@@ -24,7 +26,10 @@ export default function MoviesSection() {
         <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
                 (nowPlayingMovies as Movie[]).map((movie,index) => (
-                  <MovieCard key={index} imageUrl={BASE_URL + movie.poster_path} />
+                  <Link href={`/${movie.id}`} key={index}>
+                    <MovieCard imageUrl={BASE_URL + movie.poster_path} />
+                  </Link>
+                  
                 ))
             }
         </div>

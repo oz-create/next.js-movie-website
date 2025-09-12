@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import MovieCard from './MovieCard';
 import { BASE_URL } from '@/config/constants';
 import CollectionCard from './CollectionCard';
+import Link from 'next/link';
 
 
 export default function CollectionSection() {
@@ -13,6 +14,7 @@ export default function CollectionSection() {
     type Movie = {
         poster_path: string;
         parts: any;
+        id: number
     };
 
   return (
@@ -24,7 +26,10 @@ export default function CollectionSection() {
         <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
                 (collection as Movie[]).map((movie,index) => (
-                <CollectionCard key={index} imageUrl={BASE_URL + movie.poster_path} />
+                  <Link href={`/collection/${movie.id}`} key={index}>
+                    <CollectionCard imageUrl={BASE_URL + movie.poster_path} parts={movie.parts}/>
+                  </Link>
+                
                 ))
             }
         </div>
