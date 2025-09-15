@@ -1,67 +1,14 @@
-import { RootState } from '@/store/store';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
+import PromotionSlider from './PromotionSlider'
 import { useSelector } from 'react-redux';
-import { BASE_URL } from '@/config/constants';
+import { RootState } from '@/store/store';
 
 export default function UpcomingMoviesSection() {
   const { upcomingMovies } = useSelector((state: RootState) => state.movies);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  useEffect(() => {
-    if (!upcomingMovies || upcomingMovies.length === 0) return;
-
-    const interval = setInterval(() => {
-      setSelectedIndex((prev) => (prev + 1) % upcomingMovies.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [upcomingMovies]);
-
-  type Movie = {
-    poster_path: string;
-    backdrop_path: string;
-  };
-
-  if (!upcomingMovies || upcomingMovies.length === 0) {
-    return <p>Loading...</p>;
-  }
-
+    
   return (
-    <section>
-      <div className="relative h-[30rem] flex items-center overflow-hidden">
-        {/* Background images */}
-        {(upcomingMovies as Movie[]).map((movie, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-              index === selectedIndex ? "opacity-100" : "opacity-0"
-            }`}
-            style={{
-              backgroundImage: `url(${BASE_URL + movie.backdrop_path})`,
-            }}
-          />
-        ))}
-
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--light-color)] to-transparent" />
-
-        {/* Title */}
-        <h1 className="absolute left-20 z-10 text-6xl font-bold text-[var(--color-primary)]">
-          UPCOMING <br /> MOVIES
-        </h1>
-
-        {/* Posters */}
-        {(upcomingMovies as Movie[]).map((movie, index) => (
-          <img
-            key={index}
-            src={BASE_URL + movie.poster_path}
-            alt="Upcoming movie"
-            className={`w-[14rem] absolute right-20 rounded-xl shadow-lg border-4 border-[var(--light-color)] transition-opacity duration-1000 ${
-              index === selectedIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
-          />
-        ))}
-      </div>
-    </section>
-  );
+    <div>
+      <PromotionSlider data={upcomingMovies} title="UPCOMING MOVIES"/>
+    </div>
+  )
 }

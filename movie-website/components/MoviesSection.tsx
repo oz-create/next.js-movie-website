@@ -10,6 +10,7 @@ import Link from 'next/link';
 
 export default function MoviesSection() {
   const { moviesCategories, nowPlayingMovies} = useSelector((state: RootState) => state.movies);
+  console.log(moviesCategories)
 
   type Movie = {
     poster_path: string;

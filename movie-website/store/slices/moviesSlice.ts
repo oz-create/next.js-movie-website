@@ -114,17 +114,6 @@ export const fetchUpcomingMovies = createAsyncThunk(
     }
 )
 
-// export const fetchSeries = createAsyncThunk(
-//     "movies/fetchSeries",
-//     async () => {
-//         const res = await fetch(
-//         "https://api.themoviedb.org/3/tv/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
-//         );
-//         const data = await res.json();
-//         return data.results;
-//     }
-// )
-
 export const fetchSeriesAndSeasons = createAsyncThunk(
   "movies/fetchSeriesAndSeasons",
   async () => {
@@ -155,6 +144,27 @@ export const fetchSeriesAndSeasons = createAsyncThunk(
   }
 );
 
+export const fetchCharactors = createAsyncThunk(
+    "movies/fetchCharactors",
+    async () => {
+        const res = await fetch(
+        "https://api.themoviedb.org/3/person/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
+        );
+        const data = await res.json();
+        return data.results;
+    }
+)
+
+export const fetchTopRatedSeries = createAsyncThunk(
+    "movies/fetchTopRatedSeries",
+    async () => {
+        const res = await fetch(
+        "https://api.themoviedb.org/3/tv/top_rated?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
+        );
+        const data = await res.json();
+        return data.results;
+    }
+)
 
 type initialStateType = {
   list: object[]; 
@@ -164,7 +174,9 @@ type initialStateType = {
   seriesCategories: object[]; 
   nowPlayingMovies: object[];
   upcomingMovies : object[];
+  people : object[];
   series: object[];
+  topRatedSeries: object[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 };
@@ -179,6 +191,8 @@ const initialState: initialStateType = {
     nowPlayingMovies: [],
     upcomingMovies: [],
     series: [],
+    people: [],
+    topRatedSeries: [],
     status: "idle",
     error: null,
 }
@@ -190,17 +204,6 @@ const moviesSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
     builder
-      // .addCase(fetchMovies.pending, (state) => {
-      //   state.status = "loading";
-      // })
-      // .addCase(fetchMovies.fulfilled, (state, action) => {
-      //   state.status = "succeeded";
-      //   state.list = action.payload;
-      // })
-      // .addCase(fetchMovies.rejected, (state, action) => {
-      //   state.status = "failed";
-      //   state.error = action.error.message ?? "Bir hata oluştu";
-      // })
       .addCase(fetchMoviesCategories.pending, (state) => {
         state.status = "loading";
       })
@@ -256,30 +259,6 @@ const moviesSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message ?? "Bir hata oluştu";
       })
-
-      // .addCase(fetchCollection.fulfilled, (state, action) => {
-      //   if (action.payload.belongs_to_collection) {
-      //     const exists = state.collection.find(
-      //       (c: any) => c.id === action.payload.belongs_to_collection.id
-      //     );
-      //     if (!exists) {
-      //       state.collection.push(action.payload.belongs_to_collection);
-      //     }
-      //   }
-      // })
-
-      // .addCase(fetchCollectionDetails.pending, (state) => {
-      //   state.status = "loading";
-      // })
-      // .addCase(fetchCollectionDetails.fulfilled, (state, action) => {
-      //   state.status = "succeeded";
-      //   state.collectionDetails = action.payload;
-      // })
-      // .addCase(fetchCollectionDetails.rejected, (state, action) => {
-      //   state.status = "failed";
-      //   state.error = action.error.message ?? "Bir hata oluştu";
-      // })
-
         .addCase(fetchMoviesAndCollections.pending, (state) => {
         state.status = "loading";
       })
@@ -291,7 +270,29 @@ const moviesSlice = createSlice({
       .addCase(fetchMoviesAndCollections.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Bir hata oluştu";
-      });
+      })
+      .addCase(fetchCharactors.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCharactors.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.people = action.payload;
+      })
+      .addCase(fetchCharactors.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Bir hata oluştu";
+      })
+      .addCase(fetchTopRatedSeries.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchTopRatedSeries.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.topRatedSeries = action.payload;
+      })
+      .addCase(fetchTopRatedSeries.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Bir hata oluştu";
+      })
   },
 })
 

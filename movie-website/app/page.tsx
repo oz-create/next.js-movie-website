@@ -1,13 +1,15 @@
 "use client"
 
+import CharactorsSection from "@/components/CharactorsSection";
 import CollectionSection from "@/components/CollectionSection";
 import FirstSection from "@/components/FirstSection";
 import MoviesSection from "@/components/MoviesSection";
 import PaymentSection from "@/components/PaymentSection";
 import SeriesSection from "@/components/SeriesSection";
+import TopRatedSeries from "@/components/TopRatedSeries";
 import TrendsSection from "@/components/TrendsSection";
 import UpcomingMoviesSection from "@/components/UpcomingMoviesSection";
-import { fetchMoviesCategories, fetchNowPlayingMovies, fetchUpcomingMovies, fetchSeriesCategories, fetchMoviesAndCollections, fetchSeriesAndSeasons } from "@/store/slices/moviesSlice";
+import { fetchMoviesCategories, fetchNowPlayingMovies, fetchUpcomingMovies, fetchSeriesCategories, fetchMoviesAndCollections, fetchSeriesAndSeasons, fetchCharactors, fetchTopRatedSeries } from "@/store/slices/moviesSlice";
 import { AppDispatch , RootState} from "@/store/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,23 +20,14 @@ export default function Home() {
 
   useEffect(() => {
     if (status === "idle") {
-    //  dispatch(fetchMovies());
      dispatch(fetchMoviesCategories());
      dispatch(fetchSeriesCategories());
      dispatch(fetchNowPlayingMovies());
      dispatch(fetchUpcomingMovies());
      dispatch(fetchSeriesAndSeasons());
      dispatch(fetchMoviesAndCollections());
-    //  dispatch(fetchMovies()).then((res: any) => {
-    //   res.payload.forEach((movie: any) => {
-    //     dispatch(fetchCollection(movie.id)).then((detail: any) => {
-    //       const belongs = detail.payload.belongs_to_collection;
-    //       if (belongs) {
-    //         dispatch(fetchCollectionDetails(belongs.id));
-    //       }
-    //     });
-    //   });
-    // });
+     dispatch(fetchCharactors());
+     dispatch(fetchTopRatedSeries());
 
     }
   }, [status, dispatch]);
@@ -51,8 +44,10 @@ export default function Home() {
       <MoviesSection />
       <UpcomingMoviesSection />
       <SeriesSection />
+      <TopRatedSeries />
       <PaymentSection />
       <CollectionSection />
+      <CharactorsSection />
     </div>
   )
 }

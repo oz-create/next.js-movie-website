@@ -10,13 +10,13 @@ import SwitchButton from './SwitchButton';
 
 export default function CollectionSection() {
     const { collection, series } = useSelector((state: RootState) => state.movies);
-    console.log(series);
+    console.log(collection);
 
-    type Movie = {
+    type Collection = {
         poster_path: string;
-        parts: any;
+        parts: object[];
         id: number;
-        seasons: any;
+        seasons: object[];
     };
     const [active,setActive] = useState<boolean>(true)
     const handleSwitch = () => {
@@ -38,14 +38,14 @@ export default function CollectionSection() {
         <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
               active ?
-                (collection as Movie[]).map((movie,index) => (
+                (collection as Collection[]).map((movie,index) => (
                   <Link href={`/collection/${movie.id}`} key={index}>
                     <CollectionCard imageUrl={BASE_URL + movie.poster_path} parts={movie.parts}/>
                   </Link>
                 
                 ))
              :
-                (series as Movie[]).map((movie,index) => (
+                (series as Collection[]).map((movie,index) => (
                   <Link href={`/collection/${movie.id}`} key={index}>
                     <CollectionCard imageUrl={BASE_URL + movie.poster_path} parts={movie.seasons}/>
                   </Link>
