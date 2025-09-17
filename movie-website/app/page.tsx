@@ -15,27 +15,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
-  const dispatch = useDispatch<AppDispatch>();
-  const { status } = useSelector((state: RootState) => state.movies);
-
-  useEffect(() => {
-    if (status === "idle") {
-     dispatch(fetchMoviesCategories());
-     dispatch(fetchSeriesCategories());
-     dispatch(fetchNowPlayingMovies());
-     dispatch(fetchUpcomingMovies());
-     dispatch(fetchSeriesAndSeasons());
-     dispatch(fetchMoviesAndCollections());
-     dispatch(fetchCharactors());
-     dispatch(fetchTopRatedSeries());
-
-    }
-  }, [status, dispatch]);
-
-  if (status === "loading") return <p>Yükleniyor...</p>;
-  if (status === "failed") return <p>Hata!</p>;
-
-
 
   return (
     <div>

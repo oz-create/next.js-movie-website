@@ -45,3 +45,10 @@ export type SeriesType = ListType &{
 export type PartType = {
     poster_path : string
 }
+
+export type MovieSearchType = {
+    id: number;
+    release_date: string;
+}
+
+export type MovieSearchTypeArray = MovieSearchType[]

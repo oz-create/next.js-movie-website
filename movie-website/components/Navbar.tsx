@@ -18,14 +18,15 @@ export default function Navbar() {
   const { mode } = useSelector((state: RootState) => state.theme);
 
   const pathname = usePathname();
+  
 
   const links = [
     { href: "/", label: "Home" },
-    { href: "/pricing", label: "Pricing" },
+    { href: "/#pricing", label: "Pricing" },
     { href: "/movies", label: "Movies" },
     { href: "/series", label: "Series" },
     { href: "/collection", label: "Collection" },
-    { href: "/faq", label: "FAQ" },
+    { href: `${pathname}/#faq`, label: "FAQ" },
   ];
   return (
     <div className="flex justify-center w-full fixed top-9 z-100">
