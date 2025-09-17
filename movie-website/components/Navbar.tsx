@@ -29,7 +29,7 @@ export default function Navbar() {
   ];
   return (
     <div className="flex justify-center w-full fixed top-9 z-100">
-      <div className='relative h-20 max-w-7xl w-full flex items-center justify-between inset-0 rounded-2xl gradient-border backdrop-blur-sm pr-5 bg-[var(--light-color)]'>
+      <div className='relative h-20 max-w-7xl w-full flex items-center justify-between inset-0 rounded-2xl gradient-border pr-5 bg-[var(--light-color)]'>
         <Image
         src={`${mode === "dark" ? "/Logo-light.png" : "/Logo-dark.png"}`}
         width={92}

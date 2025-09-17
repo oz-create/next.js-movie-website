@@ -2,12 +2,10 @@ import { RootState } from '@/store/store';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BASE_URL } from '@/config/constants';
+import { ListTypeArray } from '@/types/type';
 
-export default function PromotionSlider({ data, title }: { data: object[] , title: string}) {
-    type Movie = {
-      poster_path: string;
-      backdrop_path: string;
-    };
+export default function PromotionSlider({ data, title }: { data: ListTypeArray , title: string}) {
+
     const [selectedIndex, setSelectedIndex] = useState(0);
 
      useEffect(() => {
@@ -30,7 +28,7 @@ export default function PromotionSlider({ data, title }: { data: object[] , titl
     <section>
       <div className="relative h-[30rem] flex items-center overflow-hidden">
         {/* Background images */}
-        {(data as Movie[]).map((movie, index) => (
+        {data.map((movie, index) => (
           <div
             key={index}
             className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
@@ -51,7 +49,7 @@ export default function PromotionSlider({ data, title }: { data: object[] , titl
         </h1>
 
         {/* Posters */}
-        {(data as Movie[]).map((movie, index) => (
+        {data.map((movie, index) => (
           <img
             key={index}
             src={BASE_URL + movie.poster_path}

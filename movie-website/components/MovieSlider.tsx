@@ -4,19 +4,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { BASE_URL } from '@/config/constants';
 
-type Movie = {
-  poster_path: string;
-  backdrop_path: string;
-  title: string;
-  overview: string;
-  vote_average: number;
-  // add other properties if needed
-};
 
 function MovieSlider() {
   const { list } = useSelector((state: RootState) => state.movies);
 
-  const movies = (list as Movie[]).slice(0, 4); // ilk 4 film
+  const movies = list.slice(0, 4); // ilk 4 film
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   // Auto slide (5 saniyede bir sonraki filme geç)
@@ -43,7 +35,7 @@ function MovieSlider() {
           <MovieInfo title={selectedMovie?.title || ""} description={selectedMovie?.overview || ""} rating={selectedMovie?.vote_average || 0} />
            <div className='flex items-center relative z-1'>
               {
-                (list as Movie[]).slice(0,4).map((movie, index) => (
+                list.slice(0,4).map((movie, index) => (
                   <div className={`w-[7.625rem] h-[7.625rem] cursor-pointer transition overflow-hidden rounded-xl border border-[var(--primary-blue)] mx-[-0.5rem] ${selectedMovie?.poster_path === movie.poster_path ? "scale-125 z-1" : "scale-100 z-0"}`} key={index} onClick={() => setSelectedIndex(index)}>
                     <img key={index} src={BASE_URL + movie.poster_path} alt="" className='w-full object-cover' />
                   </div>

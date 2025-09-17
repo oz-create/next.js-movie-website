@@ -1,8 +1,9 @@
+import { CategoriesTypeArray } from "@/types/type";
 import React, { useRef, useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
 
-export default function CategorySlider({ data }: { data: object[] }) {
+export default function CategorySlider({ data }: { data: CategoriesTypeArray }) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [scrollX, setScrollX] = useState(0);
 
@@ -20,13 +21,8 @@ export default function CategorySlider({ data }: { data: object[] }) {
     });
 
     setScrollX(newScroll);
-    console.log(scrollX)
-  };
 
-  type Data = {
-    id: number,
-    name: string
-  }
+  };
 
   return (
     <div className="relative w-full flex items-center">
@@ -44,7 +40,7 @@ export default function CategorySlider({ data }: { data: object[] }) {
         ref={sliderRef}
         className="flex gap-2 overflow-hidden scroll-smooth w-full mx-14"
       >
-        {(data as Data[]).map((category) => (
+        {data.map((category) => (
           <div
             key={category.id}
             className="py-3 px-5 bg-transparent border border-[var(--primary-blue)] rounded-full cursor-pointer text-[var(--color-primary)] text-sm flex-shrink-0 hover:bg-[var(--primary-blue)] transition"

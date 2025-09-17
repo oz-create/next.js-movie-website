@@ -1,15 +1,10 @@
 "use client"
 
+import { MovieInfoType } from '@/types/type'
 import { Rating } from '@mui/material'
 import React from 'react'
 
-type MovieInfoProps = {
-  title: string
-  description: string
-  rating: number
-}
-
-export default function MovieInfo({title,description,rating} : MovieInfoProps) {
+export default function MovieInfo({title,description,rating} : MovieInfoType) {
   return (
     <div className='flex flex-col gap-2 relative z-1'>
         <h1 className='text-[var(--color-primary)] text-5xl font-bold drop-shadow-[0_0_5px_var(--light-color)]'>{title}</h1>

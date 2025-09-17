@@ -1,36 +1,7 @@
+import { CategoriesTypeArray, CollectionTypeArray, ListTypeArray, PeopleTypeArray, SeriesType } from "@/types/type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// export const fetchMovies = createAsyncThunk(
-//     "movies/fetchMovies",
-//     async () => {
-//         const res = await fetch(
-//         "https://api.themoviedb.org/3/movie/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
-//         );
-//         const data = await res.json();
-//         return data.results;
-//     }
-// )
 
-// export const fetchCollection = createAsyncThunk(
-//     "movies/fetchCollection",
-//     async (id: number) => {
-//         const res = await fetch(
-//         "https://api.themoviedb.org/3/movie/" + id + "?api_key=274c12e6e2e4f9ca265a01d107280eba"
-//         );
-//         const data = await res.json();
-//         return data;
-//     }
-// )
-// export const fetchCollectionDetails = createAsyncThunk(
-//     "movies/fetchCollectionDetails",
-//     async (collectionId: number) => {
-//         const res = await fetch(
-//         "https://api.themoviedb.org/3/collection/" + collectionId + "?api_key=274c12e6e2e4f9ca265a01d107280eba"
-//         );
-//         const data = await res.json();
-//         return data;
-//     }
-// )
 export const fetchMoviesAndCollections = createAsyncThunk(
   "movies/fetchMoviesAndCollections",
   async (_, { dispatch }) => {
@@ -167,16 +138,16 @@ export const fetchTopRatedSeries = createAsyncThunk(
 )
 
 type initialStateType = {
-  list: object[]; 
-  collection: object[];
+  list: ListTypeArray; 
+  collection: CollectionTypeArray;
   collectionDetails: object | null;
-  moviesCategories: object[]; 
-  seriesCategories: object[]; 
-  nowPlayingMovies: object[];
-  upcomingMovies : object[];
-  people : object[];
-  series: object[];
-  topRatedSeries: object[];
+  moviesCategories: CategoriesTypeArray; 
+  seriesCategories: CategoriesTypeArray; 
+  nowPlayingMovies: ListTypeArray;
+  upcomingMovies : ListTypeArray;
+  people : PeopleTypeArray;
+  series: SeriesType[];
+  topRatedSeries: ListTypeArray;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 };

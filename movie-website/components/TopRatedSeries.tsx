@@ -5,7 +5,7 @@ import PromotionSlider from './PromotionSlider'
 
 export default function TopRatedSeries() {
     const { topRatedSeries } = useSelector((state: RootState) => state.movies)
-    console.log(topRatedSeries)
+
   return (
     <section>
         <PromotionSlider data={topRatedSeries} title="TOP RATED SERIES"/>

@@ -10,12 +10,6 @@ import Link from 'next/link';
 
 export default function MoviesSection() {
   const { moviesCategories, nowPlayingMovies} = useSelector((state: RootState) => state.movies);
-  console.log(moviesCategories)
-
-  type Movie = {
-    poster_path: string;
-    id: number
-  };
 
   return (
     <section className='flex flex-col gap-10 mx-10 my-20'>
@@ -26,7 +20,7 @@ export default function MoviesSection() {
         <CategorySlider data={moviesCategories} />
         <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
-                (nowPlayingMovies as Movie[]).map((movie,index) => (
+                nowPlayingMovies.map((movie,index) => (
                   <Link href={`/${movie.id}`} key={index}>
                     <MovieCard imageUrl={BASE_URL + movie.poster_path} />
                   </Link>
