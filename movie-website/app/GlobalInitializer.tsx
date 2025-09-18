@@ -11,8 +11,7 @@ import {
   fetchUpcomingMovies,
   fetchSeriesAndSeasons,
   fetchMoviesAndCollections,
-  fetchTopRatedSeries,
-  fetchMovieSearch
+  fetchTopRatedSeries
 } from "@/store/slices/moviesSlice";
 
 export default function GlobalInitializer() {
@@ -29,7 +28,6 @@ export default function GlobalInitializer() {
         dispatch(fetchMoviesAndCollections());
         dispatch(fetchCharactors());
         dispatch(fetchTopRatedSeries());
-        dispatch(fetchMovieSearch());
     }
   }, [status, dispatch]);
 

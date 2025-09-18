@@ -1,4 +1,4 @@
-import { CategoriesTypeArray, CollectionTypeArray, ListTypeArray, MovieSearchTypeArray, PeopleTypeArray, SeriesType } from "@/types/type";
+import { CategoriesTypeArray, CollectionTypeArray, ListTypeArray, PeopleTypeArray, SeriesType } from "@/types/type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
@@ -136,16 +136,7 @@ export const fetchTopRatedSeries = createAsyncThunk(
         return data.results;
     }
 )
-export const fetchMovieSearch = createAsyncThunk(
-    "movies/fetchMovieSearch",
-    async () => {
-        const res = await fetch(
-        "https://api.themoviedb.org/3/search/movie?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1&query=avatar"
-        );
-        const data = await res.json();
-        return data.results;
-    }
-)
+
 
 type initialStateType = {
   list: ListTypeArray; 
@@ -157,7 +148,6 @@ type initialStateType = {
   upcomingMovies : ListTypeArray;
   people : PeopleTypeArray;
   series: SeriesType[];
-  movieSearch: MovieSearchTypeArray;
   topRatedSeries: ListTypeArray;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
@@ -175,7 +165,6 @@ const initialState: initialStateType = {
     series: [],
     people: [],
     topRatedSeries: [],
-    movieSearch: [],
     status: "idle",
     error: null,
 }
@@ -273,17 +262,6 @@ const moviesSlice = createSlice({
         state.topRatedSeries = action.payload;
       })
       .addCase(fetchTopRatedSeries.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message ?? "Bir hata oluştu";
-      })
-      .addCase(fetchMovieSearch.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchMovieSearch.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.movieSearch = action.payload;
-      })
-      .addCase(fetchMovieSearch.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Bir hata oluştu";
       })

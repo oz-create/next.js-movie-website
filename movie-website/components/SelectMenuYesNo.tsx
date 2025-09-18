@@ -4,9 +4,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { ListTypeArray } from '@/types/type';
 
-export default function SelectMenu({ label, data, valueKey } : {label: string, data: ListTypeArray, valueKey: keyof ListTypeArray[number]}) {
+export default function SelectMenuYesNo({ label } : {label: string}) {
   const [age, setAge] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -23,11 +22,8 @@ export default function SelectMenu({ label, data, valueKey } : {label: string, d
           label="Age"
           onChange={handleChange}
         >
-            {
-                data.map((item,index)=> (
-                     <MenuItem key={index} value={String(item[valueKey])}>{String(item[valueKey])}</MenuItem>
-                ))
-            }
+             <MenuItem value="Yes">Yes</MenuItem>
+              <MenuItem value="No">No</MenuItem>
      
         </Select>
       </FormControl>
