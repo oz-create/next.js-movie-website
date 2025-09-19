@@ -95,9 +95,9 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
     }, [selectedDate, selectedAdult, selectedRating])
     
 
-    const dateArray = ["Last 6 months","Last 1 year","Last 5 Year","2020-2015","2010-2015","2000-2010","Before 2000"]
-    const yesNoArray = ["Yes","No"]
-    const ratingArray = ["4+","3-4","2-3","2-1"]
+    const dateArray = ["All","Last 6 months","Last 1 year","Last 5 Year","2020-2015","2010-2015","2000-2010","Before 2000"]
+    const yesNoArray = ["All","Yes","No"]
+    const ratingArray = ["All","4+","3-4","2-3","2-1"]
   return (
     <div className='border border-[var(--primary-blue)] rounded-3xl relative h-[20rem] mt-20 mb-10 p-10 flex flex-col items-center justify-center'>
         <div className='text-2xl text-[var(--color-primary)] absolute top-[-3.5rem] left-5 w-[15rem] h-[3.5rem] bg-[url("/blue-clip.png")] bg-cover bg-no-repeat bg-top flex justify-center items-center'>Advance Search</div>
