@@ -15,56 +15,84 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
 
     function checkPastDateRange(dateString: string) {
       const today = new Date();
-    const itemDate = new Date(dateString);
+      const itemDate = new Date(dateString);
 
-    let startDate = null;
-    let endDate = today;
+      let startDate = null;
+      let endDate = today;
 
-    switch (selectedDate) {
-      case "Last 6 months":
-        startDate = new Date(today);
-        startDate.setMonth(today.getMonth() - 6);
-        break;
-      case "Last 1 year":
-        startDate = new Date(today);
-        startDate.setFullYear(today.getFullYear() - 1);
-        break;
-      case "Last 5 years":
-        startDate = new Date(today);
-        startDate.setFullYear(today.getFullYear() - 5);
-        break;
-      case "2020-2015":
-        startDate = new Date("2015-01-01");
-        endDate = new Date("2020-12-31");
-        break;
-      case "2010-2015":
-        startDate = new Date("2010-01-01");
-        endDate = new Date("2015-12-31");
-        break;
-      case "2000-2010":
-        startDate = new Date("2000-01-01");
-        endDate = new Date("2010-12-31");
-        break;
-      case "Before 2000":
-        return itemDate < new Date("2000-01-01");
-      default:
-        return true; // hiçbir filtre seçilmemişse tüm veriyi göster
+      switch (selectedDate) {
+        case "Last 6 months":
+          startDate = new Date(today);
+          startDate.setMonth(today.getMonth() - 6);
+          break;
+        case "Last 1 year":
+          startDate = new Date(today);
+          startDate.setFullYear(today.getFullYear() - 1);
+          break;
+        case "Last 5 years":
+          startDate = new Date(today);
+          startDate.setFullYear(today.getFullYear() - 5);
+          break;
+        case "2020-2015":
+          startDate = new Date("2015-01-01");
+          endDate = new Date("2020-12-31");
+          break;
+        case "2010-2015":
+          startDate = new Date("2010-01-01");
+          endDate = new Date("2015-12-31");
+          break;
+        case "2000-2010":
+          startDate = new Date("2000-01-01");
+          endDate = new Date("2010-12-31");
+          break;
+        case "Before 2000":
+          return itemDate < new Date("2000-01-01");
+        default:
+          return true; // hiçbir filtre seçilmemişse tüm veriyi göster
+      }
+
+        return itemDate >= startDate && itemDate <= endDate;
     }
 
-    return itemDate >= startDate && itemDate <= endDate;
+    function checkAdult(adultValue: boolean) {
+      if (!selectedAdult) return true; // filtre seçilmemişse tümünü göster
+      if (selectedAdult === "Yes") return adultValue === true;
+      if (selectedAdult === "No") return adultValue === false;
+      return true;
     }
 
+    function checkRating(ratingValue: number){
+
+      switch (selectedRating) {
+        case "4+":
+          return ratingValue/2 >= 4
+        case "3-4":
+          return ratingValue/2 >= 3 && ratingValue/2 < 4;
+        case "2-3":
+          return ratingValue/2 >= 2 && ratingValue/2 < 3;
+        case "2-1":
+          return ratingValue/2 >= 1 && ratingValue/2 < 2;
+        default:
+          return true;
+      }
+    }
 
 
     const filter = () => {
-      const filteredDate = filterData.filter((element) => checkPastDateRange(element.release_date))
-      console.log(filteredDate)
-      setFilterData(filteredDate)
-    }
+      const filtered = filterData.filter((element) => {
+        const dateCheck = checkPastDateRange(element.release_date);
+        const adultCheck = checkAdult(element.adult);
+        const ratingCheck = checkRating(element.vote_average)
+        return dateCheck && adultCheck && ratingCheck;
+      });
+
+      setFilterData(filtered);
+    };
+
 
     useEffect(() => {
       filter()
-    }, [selectedDate])
+    }, [selectedDate, selectedAdult, selectedRating])
     
 
     const dateArray = ["Last 6 months","Last 1 year","Last 5 Year","2020-2015","2010-2015","2000-2010","Before 2000"]
