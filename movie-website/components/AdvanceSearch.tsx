@@ -12,7 +12,7 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
     const [selectedAdult, setSelectedAdult] = useState("")
     const [selectedRating, setSelectedRating] = useState("")
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-    console.log(selectedCategory)
+    const [search, setSearch] = useState("");
 
     function checkPastDateRange(dateString: string) {
       const today = new Date();
@@ -81,6 +81,14 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
       return genreIds.includes(selectedCategory);
     }
 
+    function handleSearch(e: React.ChangeEvent<HTMLInputElement>){
+      setSearch(e.target.value);
+    }
+    function checkSearch(title:string){
+      if (!search.trim()) return true;
+      return title.toLowerCase().includes(search.toLowerCase());
+    }
+
 
     const filter = () => {
       const filtered = filterData.filter((element) => {
@@ -88,7 +96,8 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
         const adultCheck = checkAdult(element.adult);
         const ratingCheck = checkRating(element.vote_average)
         const categoryCheck = checkCategory(element.genre_ids)
-        return dateCheck && adultCheck && ratingCheck && categoryCheck;
+        const titleCheck = checkSearch(element.title)
+        return dateCheck && adultCheck && ratingCheck && categoryCheck && titleCheck;
       });
 
       setFilterData(filtered);
@@ -97,7 +106,7 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
 
     useEffect(() => {
       filter()
-    }, [selectedDate, selectedAdult, selectedRating, selectedCategory])
+    }, [selectedDate, selectedAdult, selectedRating, selectedCategory, search])
     
 
     const dateArray = ["All","Last 6 months","Last 1 year","Last 5 Year","2020-2015","2010-2015","2000-2010"]
@@ -114,7 +123,7 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
                   <SelectMenu label="Rating" data={ratingArray} setSelected={setSelectedRating}/>
               </div>
               <div className='relative w-[40rem] h-[3rem] border rounded-xl flex items-center border-[var(--primary-blue)]'>
-                    <input type="text" placeholder='Search Movie' className='absolute w-full h-full left-0 pr-12 pl-3 text-[var(--color-primary)] outline-0'/>
+                    <input onChange={(e) => handleSearch(e)} type="text" placeholder='Search Movie' className='absolute w-full h-full left-0 pr-12 pl-3 text-[var(--color-primary)] outline-0'/>
                     <CiSearch className='text-[var(--color-primary)] w-8 h-8 object-cover absolute right-2 cursor-pointer'/>
               </div>
               <CategorySlider data={moviesCategories} setSelected={setSelectedCategory}/>
