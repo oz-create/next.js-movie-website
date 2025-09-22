@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
-export default function SelectMenu({ label, data, setSelected, filter } : {label: string, data: any[], setSelected: React.Dispatch<React.SetStateAction<any>>, filter: ()=>void }) {
+export default function SelectMenu({ label, data, setSelected } : {label: string, data: any[], setSelected: React.Dispatch<React.SetStateAction<any>>}) {
   const [age, setAge] = React.useState('');
   
 

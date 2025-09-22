@@ -9,6 +9,7 @@ export type ListType = {
     rating: number;
     release_date: string;
     adult: boolean;
+    genre_ids: number[];
 };
 
 export type ListTypeArray = ListType[]

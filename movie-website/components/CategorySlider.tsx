@@ -3,9 +3,10 @@ import React, { useRef, useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
 
-export default function CategorySlider({ data }: { data: CategoriesTypeArray }) {
+export default function CategorySlider({ data,setSelected }: { data: CategoriesTypeArray,setSelected: React.Dispatch<React.SetStateAction<any>> }) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [scrollX, setScrollX] = useState(0);
+  const [activeId, setActiveId] = useState<number | null>(null);
 
   const scrollAmount = 200; // her ok basışında kayacak px miktarı
 
@@ -23,6 +24,10 @@ export default function CategorySlider({ data }: { data: CategoriesTypeArray }) 
     setScrollX(newScroll);
 
   };
+  const selectCategory = (id: number | null) => {
+    setActiveId((prev: number | null) => prev === id ? null : id)
+    setSelected((prev: number) => prev === id ? null : id)
+  }
 
   return (
     <div className="relative w-full flex items-center">
@@ -41,10 +46,14 @@ export default function CategorySlider({ data }: { data: CategoriesTypeArray }) 
         className="flex gap-2 overflow-hidden scroll-smooth w-full mx-14"
       >
         {data.map((category) => (
-          <div
+          <div onClick={() => selectCategory(category.id)}
             key={category.id}
-            className="py-3 px-5 bg-transparent border border-[var(--primary-blue)] rounded-full cursor-pointer text-[var(--color-primary)] text-sm flex-shrink-0 hover:bg-[var(--primary-blue)] transition"
-          >
+            className={`py-3 px-5 border border-[var(--primary-blue)] rounded-full cursor-pointer text-[var(--color-primary)] text-sm flex-shrink-0 hover:bg-[var(--primary-blue)] transition
+              ${
+                activeId === category.id
+                  ? "bg-[var(--primary-blue)]"
+                  : "bg-transparent"}
+              `}>
             {category.name}
           </div>
         ))}

@@ -11,7 +11,8 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
     const [selectedDate, setSelectedDate] = useState("")
     const [selectedAdult, setSelectedAdult] = useState("")
     const [selectedRating, setSelectedRating] = useState("")
-    console.log(selectedDate,selectedAdult,selectedRating)
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    console.log(selectedCategory)
 
     function checkPastDateRange(dateString: string) {
       const today = new Date();
@@ -45,8 +46,6 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
           startDate = new Date("2000-01-01");
           endDate = new Date("2010-12-31");
           break;
-        case "Before 2000":
-          return itemDate < new Date("2000-01-01");
         default:
           return true; // hiçbir filtre seçilmemişse tüm veriyi göster
       }
@@ -77,13 +76,19 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
       }
     }
 
+    function checkCategory(genreIds: number[]) {
+      if (selectedCategory === null) return true;
+      return genreIds.includes(selectedCategory);
+    }
+
 
     const filter = () => {
       const filtered = filterData.filter((element) => {
         const dateCheck = checkPastDateRange(element.release_date);
         const adultCheck = checkAdult(element.adult);
         const ratingCheck = checkRating(element.vote_average)
-        return dateCheck && adultCheck && ratingCheck;
+        const categoryCheck = checkCategory(element.genre_ids)
+        return dateCheck && adultCheck && ratingCheck && categoryCheck;
       });
 
       setFilterData(filtered);
@@ -92,10 +97,10 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
 
     useEffect(() => {
       filter()
-    }, [selectedDate, selectedAdult, selectedRating])
+    }, [selectedDate, selectedAdult, selectedRating, selectedCategory])
     
 
-    const dateArray = ["All","Last 6 months","Last 1 year","Last 5 Year","2020-2015","2010-2015","2000-2010","Before 2000"]
+    const dateArray = ["All","Last 6 months","Last 1 year","Last 5 Year","2020-2015","2010-2015","2000-2010"]
     const yesNoArray = ["All","Yes","No"]
     const ratingArray = ["All","4+","3-4","2-3","2-1"]
   return (
@@ -104,15 +109,15 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
           <div className='flex flex-col items-center justify-center gap-10'>
               <img src="/search-logo.png" alt="search image" className='w-[14rem] absolute left-5 top-5' />
               <div className='flex items-center justify-center gap-5'>
-                  <SelectMenu label="Date" data={dateArray} setSelected={setSelectedDate} filter={filter}/>
-                  <SelectMenu label="Adult" data={yesNoArray} setSelected={setSelectedAdult} filter={filter}/>
-                  <SelectMenu label="Rating" data={ratingArray} setSelected={setSelectedRating} filter={filter}/>
+                  <SelectMenu label="Date" data={dateArray} setSelected={setSelectedDate}/>
+                  <SelectMenu label="Adult" data={yesNoArray} setSelected={setSelectedAdult}/>
+                  <SelectMenu label="Rating" data={ratingArray} setSelected={setSelectedRating}/>
               </div>
               <div className='relative w-[40rem] h-[3rem] border rounded-xl flex items-center border-[var(--primary-blue)]'>
                     <input type="text" placeholder='Search Movie' className='absolute w-full h-full left-0 pr-12 pl-3 text-[var(--color-primary)] outline-0'/>
                     <CiSearch className='text-[var(--color-primary)] w-8 h-8 object-cover absolute right-2 cursor-pointer'/>
               </div>
-              <CategorySlider data={moviesCategories} />
+              <CategorySlider data={moviesCategories} setSelected={setSelectedCategory}/>
         </div>
 
     </div>
