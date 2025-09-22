@@ -8,8 +8,10 @@ export type ListType = {
     description: string;
     rating: number;
     release_date: string;
+    first_air_date: string;
     adult: boolean;
     genre_ids: number[];
+    name: string;
 };
 
 export type ListTypeArray = ListType[]

@@ -6,7 +6,7 @@ import { CiSearch } from 'react-icons/ci';
 import CategorySlider from './CategorySlider';
 import { ListTypeArray } from '@/types/type';
 
-export default function AdvanceSearch({filterData,setFilterData}:{filterData: ListTypeArray, setFilterData: React.Dispatch<React.SetStateAction<ListTypeArray>>}) {
+export default function AdvanceSearch({filterData,setFilterData,searchName}:{filterData: ListTypeArray, setFilterData: React.Dispatch<React.SetStateAction<ListTypeArray>>,searchName:string}) {
     const { moviesCategories } = useSelector((state: RootState) => state.movies);
     const [selectedDate, setSelectedDate] = useState("")
     const [selectedAdult, setSelectedAdult] = useState("")
@@ -92,11 +92,11 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
 
     const filter = () => {
       const filtered = filterData.filter((element) => {
-        const dateCheck = checkPastDateRange(element.release_date);
+        const dateCheck = searchName === "movies" ? checkPastDateRange(element.release_date) : checkPastDateRange(element.first_air_date);
         const adultCheck = checkAdult(element.adult);
         const ratingCheck = checkRating(element.vote_average)
         const categoryCheck = checkCategory(element.genre_ids)
-        const titleCheck = checkSearch(element.title)
+        const titleCheck = searchName === "movie" ? checkSearch(element.title) : checkSearch(element.name)
         return dateCheck && adultCheck && ratingCheck && categoryCheck && titleCheck;
       });
 
@@ -123,7 +123,7 @@ export default function AdvanceSearch({filterData,setFilterData}:{filterData: Li
                   <SelectMenu label="Rating" data={ratingArray} setSelected={setSelectedRating}/>
               </div>
               <div className='relative w-[40rem] h-[3rem] border rounded-xl flex items-center border-[var(--primary-blue)]'>
-                    <input onChange={(e) => handleSearch(e)} type="text" placeholder='Search Movie' className='absolute w-full h-full left-0 pr-12 pl-3 text-[var(--color-primary)] outline-0'/>
+                    <input onChange={(e) => handleSearch(e)} type="text" placeholder={"Search" + " "+ searchName} className='absolute w-full h-full left-0 pr-12 pl-3 text-[var(--color-primary)] outline-0'/>
                     <CiSearch className='text-[var(--color-primary)] w-8 h-8 object-cover absolute right-2 cursor-pointer'/>
               </div>
               <CategorySlider data={moviesCategories} setSelected={setSelectedCategory}/>

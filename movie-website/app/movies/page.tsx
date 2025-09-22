@@ -21,7 +21,7 @@ export default function MoviesPage() {
   return (
     <div className='pt-40 px-10'>
         <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Movies</h1>
-        <AdvanceSearch filterData={nowPlayingMovies} setFilterData={setFilteredMovies}/>
+        <AdvanceSearch filterData={nowPlayingMovies} setFilterData={setFilteredMovies} searchName='movies'/>
          <div className='flex items-center justify-center gap-5 flex-wrap'>
             {
                 filteredMovies.map((movie,index) => (
