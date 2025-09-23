@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 
 export default function SeriesPage() {
-    const { series } = useSelector((state: RootState) => state.movies);
+    const { series, seriesCategories } = useSelector((state: RootState) => state.movies);
     console.log(series)
     const [filteredSeries,setFilteredSeries] = useState<ListTypeArray>(series)
 
@@ -21,7 +21,7 @@ export default function SeriesPage() {
   return (
     <div className='pt-40 px-10'>
         <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Series</h1>
-        <AdvanceSearch filterData={series} setFilterData={setFilteredSeries} searchName={"series"}/>
+        <AdvanceSearch filterData={series} setFilterData={setFilteredSeries} searchName={"series"} categories={seriesCategories}/>
          <div className='flex items-center justify-center gap-5 flex-wrap'>
             {
                 filteredSeries.map((movie,index) => (

@@ -16,7 +16,7 @@ export default function TrendsSection() {
           <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Trends</h1>
           <SeeMoreButton link="/trends" />
         </div>
-        <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
+        <div className='flex items-center justify-start gap-5 overflow-x-auto overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
                 list.map((movie,index) => (
                   <Link href={`/${movie.id}`} key={index}>

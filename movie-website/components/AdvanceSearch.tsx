@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store';
 import { CiSearch } from 'react-icons/ci';
 import CategorySlider from './CategorySlider';
-import { ListTypeArray } from '@/types/type';
+import { CategoriesTypeArray, ListTypeArray } from '@/types/type';
 
-export default function AdvanceSearch({filterData,setFilterData,searchName}:{filterData: ListTypeArray, setFilterData: React.Dispatch<React.SetStateAction<ListTypeArray>>,searchName:string}) {
-    const { moviesCategories } = useSelector((state: RootState) => state.movies);
+export default function AdvanceSearch({filterData,setFilterData,searchName,categories}:{filterData: ListTypeArray, setFilterData: React.Dispatch<React.SetStateAction<ListTypeArray>>,searchName:string, categories: CategoriesTypeArray}) {
+
     const [selectedDate, setSelectedDate] = useState("")
     const [selectedAdult, setSelectedAdult] = useState("")
     const [selectedRating, setSelectedRating] = useState("")
@@ -126,7 +126,7 @@ export default function AdvanceSearch({filterData,setFilterData,searchName}:{fil
                     <input onChange={(e) => handleSearch(e)} type="text" placeholder={"Search" + " "+ searchName} className='absolute w-full h-full left-0 pr-12 pl-3 text-[var(--color-primary)] outline-0'/>
                     <CiSearch className='text-[var(--color-primary)] w-8 h-8 object-cover absolute right-2 cursor-pointer'/>
               </div>
-              <CategorySlider data={moviesCategories} setSelected={setSelectedCategory}/>
+              <CategorySlider data={filterData} setSelected={setSelectedCategory} categories={categories}/>
         </div>
 
     </div>

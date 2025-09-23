@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import MovieCard from './MovieCard'
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
@@ -13,7 +13,8 @@ export default function SeriesSection() {
   const { seriesCategories, series } = useSelector((state: RootState) => state.movies);
 
     const [filteredData,setFilterData] = useState<ListTypeArray>(series)
-     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+
   
       useEffect(() => {
         setFilterData(series)
@@ -46,7 +47,7 @@ export default function SeriesSection() {
         <SeeMoreButton link="/series" />
       </div>
         
-        <CategorySlider data={seriesCategories} setSelected={setSelectedCategory}/>
+        <CategorySlider data={series} setSelected={setSelectedCategory} categories={seriesCategories}/>
         <div className='flex items-center justify-start gap-5 overflow-x-auto overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
                 filteredData.map((movie,index) => (
