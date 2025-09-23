@@ -48,7 +48,7 @@ export default function MoviesSection() {
         <div className='flex items-center justify-start gap-5 overflow-x-auto overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
                 filteredData.map((movie,index) => (
-                  <Link href={`/${movie.id}`} key={index}>
+                  <Link href={`/movies/${movie.id}`} key={index}>
                     <MovieCard imageUrl={BASE_URL + movie.poster_path} />
                   </Link>
                   

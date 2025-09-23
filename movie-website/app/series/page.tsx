@@ -25,7 +25,7 @@ export default function SeriesPage() {
          <div className='flex items-center justify-center gap-5 flex-wrap'>
             {
                 filteredSeries.map((movie,index) => (
-                  <Link href={`/${movie.id}`} key={index}>
+                  <Link href={`/series/${movie.id}`} key={index}>
                     <MovieCard imageUrl={BASE_URL + movie.poster_path} />
                   </Link>
                   

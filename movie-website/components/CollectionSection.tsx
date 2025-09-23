@@ -1,7 +1,6 @@
 import { RootState } from '@/store/store';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import MovieCard from './MovieCard';
 import { BASE_URL } from '@/config/constants';
 import CollectionCard from './CollectionCard';
 import Link from 'next/link';
