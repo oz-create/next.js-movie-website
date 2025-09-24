@@ -5,6 +5,8 @@ import MovieInfo from './MovieInfo'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import axios from 'axios'
+import Link from 'next/link'
+import MovieCard from './MovieCard'
 
 type MovieSerieDetailProps<T extends "movie" | "serie"> = {
   selectedType: T
@@ -53,19 +55,19 @@ const [similar, setSimilar] = useState<SimilarType[]>([]);
             <MovieInfo title={selectedType === "serie" ? selected.name : selected.title} description={selected?.overview || ""} rating={selected?.vote_average || 0} />
             </div> 
         </div>
-        <div className='flex gap-5 px-10'>
+        <div className='flex gap-5 py-5 mx-10 overflow-x-auto'>
             {selectedType === "serie" ?
                 (selected as SeriesType)?.seasons.map((season, index) => (
                     <div
                     key={index}
-                    className="w-40 h-60 bg-cover bg-center rounded-lg shadow-lg"
+                    className="min-w-40 h-60 bg-cover bg-center rounded-lg shadow-lg"
                     style={{ backgroundImage: `url(${BASE_URL + season.poster_path})` }}
                 />
                 )) 
                 :  (selected as ListType).collection?.parts?.map((part, index) => (
                         <div
                         key={index}
-                        className="w-40 h-60 bg-cover bg-center rounded-lg shadow-lg"
+                        className="min-w-40 h-60 bg-cover bg-center rounded-lg shadow-lg"
                         style={{ backgroundImage: `url(${BASE_URL + part.poster_path})` }}
                     />
                 ))
@@ -81,16 +83,20 @@ const [similar, setSimilar] = useState<SimilarType[]>([]);
           }
 
         </div>
-        <div className="flex gap-5 overflow-x-auto px-10">
-          {similar.map((item) => (
-            <div
-              key={item.id}
-              className="w-40 h-60 bg-cover bg-center rounded-lg shadow-lg flex-shrink-0"
-              style={{ backgroundImage: `url(${BASE_URL + item.poster_path})` }}
-              title={item.title || item.name}
-            />
-          ))}
+        <div className='px-10'>
+          {
+            <h1 className='text-[var(--color-primary)] text-4xl font-bold'>Suggestion like {selectedType === "serie" ? selected.name : selected.title}</h1>
+          }
+          
+            <div className="flex items-center justify-start gap-5 overflow-x-auto overflow-y-hidden max-w-[100%] py-5 px-2">
+              {similar.map((item) => (
+                <Link href={`/${selectedType === "serie" ? "series" : "movies"}/${item.id}`} key={item.id}>
+                  <MovieCard imageUrl={BASE_URL + item.poster_path} />
+                </Link>
+              ))}
+            </div>
         </div>
+        
 
     </div>
     
