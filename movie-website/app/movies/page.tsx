@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 
 export default function MoviesPage() {
     const { nowPlayingMovies, moviesCategories } = useSelector((state: RootState) => state.movies);
-    console.log(nowPlayingMovies)
     const [filteredMovies,setFilteredMovies] = useState<ListTypeArray>(nowPlayingMovies)
 
     useEffect(() => {

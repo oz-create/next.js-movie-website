@@ -15,7 +15,6 @@ export default function CategorySlider({ data,setSelected,categories }: { data: 
         const isExist = data.find((element)=>{
           return element.genre_ids.includes(category.id)
         })
-        console.log(isExist)
         if(isExist){
           return true
         }else{

@@ -2,8 +2,8 @@ import { CategoriesTypeArray, CollectionTypeArray, ListTypeArray, PeopleTypeArra
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const fetchMoviesAndCollections = createAsyncThunk(
-  "movies/fetchMoviesAndCollections",
+export const fetchMoviesCollections = createAsyncThunk(
+  "movies/fetchMoviesCollections",
   async (_, { dispatch }) => {
     // 1. Popüler filmleri çek
     const res = await fetch(
@@ -37,9 +37,50 @@ export const fetchMoviesAndCollections = createAsyncThunk(
       })
     );
 
-    return { movies, collections };
+    return { collections };
   }
 );
+
+
+
+export const fetchMoviesAndCollections = createAsyncThunk(
+  "movies/fetchMoviesAndCollections",
+  async () => {
+    // 1. Popüler filmleri çek
+    const res = await fetch(
+      "https://api.themoviedb.org/3/movie/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
+    );
+    const data = await res.json();
+    const movies = data.results;
+
+    // 2. Filmler + collection detaylarını birlikte topla
+    const moviesWithCollections = await Promise.all(
+      movies.map(async (m: { id: number }) => {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/${m.id}?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`
+        );
+        const detail = await res.json();
+
+        let collectionDetail = null;
+        if (detail.belongs_to_collection) {
+          const cRes = await fetch(
+            `https://api.themoviedb.org/3/collection/${detail.belongs_to_collection.id}?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`
+          );
+          collectionDetail = await cRes.json();
+        }
+
+        return {
+          ...m,
+          ...detail, // movie detail bilgilerini de ekliyoruz
+          collection: collectionDetail, // varsa collection detayları
+        };
+      })
+    );
+
+    return { movies: moviesWithCollections };
+  }
+);
+
 
 export const fetchMoviesCategories = createAsyncThunk(
     "movies/fetchMoviesCategories",
@@ -115,6 +156,34 @@ export const fetchSeriesAndSeasons = createAsyncThunk(
   }
 );
 
+// export const fetchSeriesSimilar = createAsyncThunk(
+//   "movies/fetchSeriesSimilar",
+//   async () => {
+//     // 1. Popüler diziler
+//     const res = await fetch(
+//       "https://api.themoviedb.org/3/tv/popular?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
+//     );
+//     const data = await res.json();
+//     const series = data.results;
+
+//     // 2. İlk 5 tanesi için similar dizileri çek
+//     const seriesWithSimilar = await Promise.all(
+//       series.slice(0, 5).map(async (s: TmdbSeries) => {
+//         const res = await fetch(
+//           `https://api.themoviedb.org/3/tv/${s.id}/similar?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`
+//         );
+//         const detail = await res.json();
+//         return {
+//           ...s,
+//           similar: detail.results, 
+//         };
+//       })
+//     );
+
+//     return { series: seriesWithSimilar };
+//   }
+// );
+
 export const fetchCharactors = createAsyncThunk(
     "movies/fetchCharactors",
     async () => {
@@ -148,6 +217,7 @@ type initialStateType = {
   upcomingMovies : ListTypeArray;
   people : PeopleTypeArray;
   series: SeriesType[];
+  // seriesWithSimilar: TmdbSeries[];
   topRatedSeries: ListTypeArray;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
@@ -156,6 +226,7 @@ type initialStateType = {
 
 const initialState: initialStateType = {
     list: [],
+    // seriesWithSimilar: [],
     collection: [],
     collectionDetails: [],
     moviesCategories: [],
@@ -236,8 +307,7 @@ const moviesSlice = createSlice({
       })
       .addCase(fetchMoviesAndCollections.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.list = action.payload.movies;        // sadece filmler
-        state.collection = action.payload.collections; // sadece collection verileri
+        state.list = action.payload.movies;      
       })
       .addCase(fetchMoviesAndCollections.rejected, (state, action) => {
         state.status = "failed";
@@ -265,6 +335,28 @@ const moviesSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message ?? "Bir hata oluştu";
       })
+      .addCase(fetchMoviesCollections.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchMoviesCollections.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.collection = action.payload.collections;
+      })
+      .addCase(fetchMoviesCollections.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Bir hata oluştu";
+      })
+      // .addCase(fetchSeriesSimilar.pending, (state) => {
+      //   state.status = "loading";
+      // })
+      // .addCase(fetchSeriesSimilar.fulfilled, (state, action) => {
+      //   state.status = "succeeded";
+      //   state.seriesWithSimilar = action.payload.series;
+      // })
+      // .addCase(fetchSeriesSimilar.rejected, (state, action) => {
+      //   state.status = "failed";
+      //   state.error = action.error.message ?? "Bir hata oluştu";
+      // })
   },
 })
 
