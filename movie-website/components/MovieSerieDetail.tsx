@@ -59,21 +59,30 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
         </div>
       
     </div>
-    <div className='flex gap-5 py-5 mx-10'>
+    <div>
             {selectedType === "serie" ?
-                details?.seasons.map((season, index) => (
+              details?.seasons == null ? "" :
+              <div className='flex gap-5 py-5 mx-10'>
+                {
+                 details?.seasons.map((season, index) => (
                     <div
                     key={index}
                     className="min-w-40 h-60 bg-cover bg-center rounded-lg shadow-lg"
                     style={{ backgroundImage: `url(${BASE_URL + season.poster_path})` }}
                 />
                 )) 
+                }
+                  
+              </div>
                 : 
                   details.belongs_to_collection == null ? "" :
-                  <div
+                  <div className="flex gap-5 py-5 mx-10">
+                      <div
                         className="min-w-40 h-60 bg-cover bg-center rounded-lg shadow-lg"
                         style={{ backgroundImage: `url(${BASE_URL + details?.belongs_to_collection?.poster_path})` }}
                   />
+                  </div>
+                  
         }
       </div> 
       <div className='flex items-center gap-5 p-10'>
