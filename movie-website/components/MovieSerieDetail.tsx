@@ -113,12 +113,13 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
             </div>
         </div>
         <div className='p-10'>
+          <h1 className='text-[var(--color-primary)] text-4xl font-bold'>Comments</h1>
             <div className="flex gap-3 overflow-x-auto overflow-y-hidden py-5">
             {
               reviews.map((review,index) => {
                 return (
                   <div key={index} className='flex flex-col gap-2 min-w-[20rem] w-[20rem] h-[20rem] border border-[var(--primary-blue)] rounded-2xl overflow-hidden p-5'>
-                    <p className='text-[var(--color-primary)] text-sm text-right'>
+                    <p className='text-[#808080] text-sm text-right font-bold'>
                       {new Date(review.created_at).toLocaleDateString("tr-TR", {
                         day: "2-digit",
                         month: "2-digit",
