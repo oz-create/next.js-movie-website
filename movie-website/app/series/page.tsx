@@ -10,13 +10,18 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 
 export default function SeriesPage() {
-    const { series, seriesCategories } = useSelector((state: RootState) => state.movies);
+    const { series, topRatedSeries ,seriesCategories } = useSelector((state: RootState) => state.movies);
     console.log(series)
     const [filteredSeries,setFilteredSeries] = useState<ListTypeArray>(series)
 
+  const merged = [...series, ...topRatedSeries].filter(
+  (item, index, self) =>
+    index === self.findIndex((t) => t.id === item.id)
+  );
+
     useEffect(() => {
-      setFilteredSeries(series)
-    }, [series])
+      setFilteredSeries(merged)
+    }, [series, topRatedSeries])
     
   return (
     <div className='pt-40 px-10'>

@@ -8,7 +8,7 @@ export default function UpcomingMoviesSection() {
     
   return (
     <div>
-      <PromotionSlider data={upcomingMovies} title="UPCOMING MOVIES"/>
+      <PromotionSlider data={upcomingMovies} dataType="movies" title="UPCOMING MOVIES"/>
     </div>
   )
 }

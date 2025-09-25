@@ -8,7 +8,7 @@ export default function TopRatedSeries() {
 
   return (
     <section>
-        <PromotionSlider data={topRatedSeries} title="TOP RATED SERIES"/>
+        <PromotionSlider data={topRatedSeries} dataType='series' title="TOP RATED SERIES"/>
     </section>
   )
 }

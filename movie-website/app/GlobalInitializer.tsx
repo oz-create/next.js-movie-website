@@ -13,7 +13,6 @@ import {
   fetchMoviesAndCollections,
   fetchTopRatedSeries,
   fetchMoviesCollections,
-  // fetchSeriesSimilar
 } from "@/store/slices/moviesSlice";
 
 export default function GlobalInitializer() {
@@ -31,7 +30,6 @@ export default function GlobalInitializer() {
         dispatch(fetchCharactors());
         dispatch(fetchTopRatedSeries());
         dispatch(fetchMoviesCollections());
-        // dispatch(fetchSeriesSimilar());
     }
   }, [status, dispatch]);
 

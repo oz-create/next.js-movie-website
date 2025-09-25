@@ -10,12 +10,17 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 
 export default function MoviesPage() {
-    const { nowPlayingMovies, moviesCategories } = useSelector((state: RootState) => state.movies);
-    const [filteredMovies,setFilteredMovies] = useState<ListTypeArray>(nowPlayingMovies)
+  const { nowPlayingMovies,list, moviesCategories,upcomingMovies } = useSelector((state: RootState) => state.movies);
+  const [filteredMovies,setFilteredMovies] = useState<ListTypeArray>(nowPlayingMovies)
+
+  const merged = [...nowPlayingMovies, ...list, ...upcomingMovies].filter(
+  (item, index, self) =>
+    index === self.findIndex((t) => t.id === item.id)
+  );
 
     useEffect(() => {
-      setFilteredMovies(nowPlayingMovies)
-    }, [nowPlayingMovies])
+      setFilteredMovies(merged)
+    }, [nowPlayingMovies,list])
     
   return (
     <div className='pt-40 px-10'>

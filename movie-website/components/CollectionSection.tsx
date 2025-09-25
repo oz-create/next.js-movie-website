@@ -27,7 +27,7 @@ export default function CollectionSection() {
           
           <SwitchButton option1='Movies' option2='Series' state={active} switchFunction={handleSwitch}/>
         </div>
-        <div className='flex items-center justify-start gap-5 overflow-x-scroll overflow-y-hidden max-w-[100%] py-5 px-2'>
+        <div className='flex items-center justify-start gap-5 overflow-x-auto overflow-y-hidden max-w-[100%] py-5 px-2'>
             {
               active ?
                 collection.map((movie,index) => (

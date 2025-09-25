@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BASE_URL } from '@/config/constants';
 import { ListTypeArray } from '@/types/type';
+import Link from 'next/link';
 
-export default function PromotionSlider({ data, title }: { data: ListTypeArray , title: string}) {
+export default function PromotionSlider({ data, title, dataType }: { data: ListTypeArray , title: string, dataType: string}) {
 
     const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -50,14 +51,16 @@ export default function PromotionSlider({ data, title }: { data: ListTypeArray ,
 
         {/* Posters */}
         {data.map((movie, index) => (
-          <img
-            key={index}
+          <Link href={`${dataType}/${movie.id}`} key={index} className='w-[14rem] absolute right-20'>
+            <img
             src={BASE_URL + movie.poster_path}
             alt="Upcoming movie"
-            className={`w-[14rem] absolute right-20 rounded-xl shadow-lg border-4 border-[var(--light-color)] transition-opacity duration-1000 ${
+            className={`rounded-xl shadow-lg border-4 border-[var(--light-color)] transition-opacity duration-1000 ${
               index === selectedIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           />
+          </Link>
+          
         ))}
       </div>
     </section>
