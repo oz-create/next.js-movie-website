@@ -1,5 +1,5 @@
 import { BASE_URL } from '@/config/constants'
-import { CollectionType, ListType, SeriesType, SimilarType } from '@/types/type'
+import { CollectionType, ListType, ReviewType, SeriesType, SimilarType } from '@/types/type'
 import React, { useEffect, useState } from 'react'
 import MovieInfo from './MovieInfo'
 import { useSelector } from 'react-redux'
@@ -23,6 +23,7 @@ export default function MovieSerieDetail<T extends "movie" | "serie">(
   const genreNames = moviesCategories.filter((cat) => selected.genre_ids.includes(cat.id)).map((cat) => cat.name);
 
 const [similar, setSimilar] = useState<SimilarType[]>([]);
+const [reviews, setReviews] = useState<ReviewType[]>([]);
 
 
   useEffect(() => {
@@ -40,9 +41,24 @@ const [similar, setSimilar] = useState<SimilarType[]>([]);
     fetchData();
   }, [selected.id, selectedType]);
 
+    useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/${selectedType === "serie" ? "tv" : "movie"}/${selected.id}/reviews?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1`
+        );
+        setReviews(res.data.results); // sadece results array
+      } catch (error) {
+        console.error("Veri çekme hatası:", error);
+      }
+    };
+
+    fetchData();
+  }, [selected.id, selectedType]);
+
   useEffect(() => {
-  console.log("Benzer içerikler:", similar);
-}, [similar]);
+  console.log("reviews:", reviews);
+}, [reviews]);
 
   
   return (
@@ -96,7 +112,38 @@ const [similar, setSimilar] = useState<SimilarType[]>([]);
               ))}
             </div>
         </div>
-        
+        <div className='p-10'>
+            <div className="flex gap-3 overflow-x-auto overflow-y-hidden py-5">
+            {
+              reviews.map((review,index) => {
+                return (
+                  <div key={index} className='flex flex-col gap-2 min-w-[20rem] w-[20rem] h-[20rem] border border-[var(--primary-blue)] rounded-2xl overflow-hidden p-5'>
+                    <p className='text-[var(--color-primary)] text-sm text-right'>
+                      {new Date(review.created_at).toLocaleDateString("tr-TR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric"
+                      })}
+                    </p>
+                    <div className='flex items-center gap-3'>
+                      <div className='bg-[var(--color-primary)] w-[3rem] h-[3rem] rounded-full overflow-hidden'>
+                        {
+                          review.author_details.avatar_path !== null ?
+                          <img src={BASE_URL + review.author_details.avatar_path} alt="" className='object-cover object-center' />
+                          : <img src="/user.jpg" alt="" />
+                        }
+                      </div>
+                      <p className='text-[#808080] text-base font-bold'>{review.author_details.username}</p>
+                    </div>
+                    <p className='overflow-y-auto overflow-x-hidden text-[var(--color-primary)] text-base'>{review.content}</p>
+                  </div>
+                )
+                
+              })
+            }
+        </div>
+        </div>
+      
 
     </div>
     

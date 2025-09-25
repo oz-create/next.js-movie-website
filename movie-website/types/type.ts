@@ -61,3 +61,17 @@ export type PartType = {
     poster_path : string
 }
 
+export type ReviewType = {
+    author_details : AuthorDetails,
+    content: string,
+    created_at: string,
+    updated_at: string,
+    url: string
+}
+
+export type AuthorDetails = {
+    name: string,
+    username: string,
+    avatar_path: string | null,
+    rating: number
+}

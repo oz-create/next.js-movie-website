@@ -41,8 +41,6 @@ export const fetchMoviesCollections = createAsyncThunk(
   }
 );
 
-
-
 export const fetchMoviesAndCollections = createAsyncThunk(
   "movies/fetchMoviesAndCollections",
   async () => {
@@ -104,17 +102,6 @@ export const fetchSeriesCategories = createAsyncThunk(
     }
 )
 
-// export const fetchNowPlayingMovies = createAsyncThunk(
-//     "movies/fetchNowPlayingMovies",
-//     async () => {
-//         const res = await fetch(
-//         "https://api.themoviedb.org/3/movie/now_playing?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
-//         );
-//         const data = await res.json();
-//         return data.results;
-//     }
-// )
-
 export const fetchNowPlayingMovies = createAsyncThunk(
   "movies/fetchNowPlayingMovies",
   async () => {
@@ -152,17 +139,6 @@ export const fetchNowPlayingMovies = createAsyncThunk(
     return { movies: moviesWithCollections };
   }
 );
-
-// export const fetchUpcomingMovies = createAsyncThunk(
-//     "movies/fetchUpcomingMovies",
-//     async () => {
-//         const res = await fetch(
-//         "https://api.themoviedb.org/3/movie/upcoming?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US&page=1"
-//         );
-//         const data = await res.json();
-//         return data.results;
-//     }
-// )
 
 export const fetchUpcomingMovies = createAsyncThunk(
   "movies/fetchUpcomingMovies",
