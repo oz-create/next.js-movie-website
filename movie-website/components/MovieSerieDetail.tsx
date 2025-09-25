@@ -21,7 +21,6 @@ export default function MovieSerieDetail({details,selectedType}:{details: Detail
           `https://api.themoviedb.org/3/${selectedType === "serie" ? "tv" : "movie"}/${details.id}/similar?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`,
         );
         setSimilar(res.data.results.slice(0, 5));
-        console.log(res.data.results.slice(0, 5))
       } catch (error) {
         console.error("Veri çekme hatası:", error);
       }
@@ -30,7 +29,6 @@ export default function MovieSerieDetail({details,selectedType}:{details: Detail
     fetchData();
   }, [details.id]);
 
-console.log(details)
 
 const [reviews, setReviews] = useState<ReviewType[]>([]);
 
@@ -112,39 +110,60 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
              </div>
          </div>
          <div className='p-10'>
-          {
-            reviews.length > 0 ? <h1 className='text-[var(--color-primary)] text-4xl font-bold'>Comments</h1> : ""
-          }
-          
-            <div className="flex gap-3 overflow-x-auto overflow-y-hidden py-5">
             {
-              reviews.map((review,index) => {
-                return (
-                  <div key={index} className='flex flex-col gap-2 min-w-[20rem] w-[20rem] h-[20rem] border border-[var(--primary-blue)] rounded-2xl overflow-hidden p-5'>
-                    <p className='text-[#808080] text-sm text-right font-bold'>
-                      {new Date(review.created_at).toLocaleDateString("tr-TR", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric"
-                      })}
-                    </p>
-                    <div className='flex items-center gap-3'>
-                      <div className='bg-[var(--color-primary)] w-[3rem] h-[3rem] rounded-full overflow-hidden'>
-                        {
-                          review.author_details.avatar_path !== null ?
-                          <img src={BASE_URL + review.author_details.avatar_path} alt="" className='object-cover object-center' />
-                          : <img src="/user.jpg" alt="" />
-                        }
-                      </div>
-                      <p className='text-[#808080] text-base font-bold'>{review.author_details.username}</p>
-                    </div>
-                    <p className='overflow-y-auto overflow-x-hidden text-[var(--color-primary)] text-base'>{review.content}</p>
-                  </div>
-                )
-                
-              })
+              reviews.length > 0 ? <h1 className='text-[var(--color-primary)] text-4xl font-bold'>Comments</h1> : ""
             }
+            
+              <div className="flex gap-3 overflow-x-auto overflow-y-hidden py-5">
+              {
+                reviews.map((review,index) => {
+                  return (
+                    <div key={index} className='flex flex-col gap-2 min-w-[20rem] w-[20rem] h-[20rem] border border-[var(--primary-blue)] rounded-2xl overflow-hidden p-5'>
+                      <p className='text-[#808080] text-sm text-right font-bold'>
+                        {new Date(review.created_at).toLocaleDateString("tr-TR", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric"
+                        })}
+                      </p>
+                      <div className='flex items-center gap-3'>
+                        <div className='bg-[var(--color-primary)] w-[3rem] h-[3rem] rounded-full overflow-hidden'>
+                          {
+                            review.author_details.avatar_path !== null ?
+                            <img src={BASE_URL + review.author_details.avatar_path} alt="" className='object-cover object-center' />
+                            : <img src="/user.jpg" alt="" />
+                          }
+                        </div>
+                        <p className='text-[#808080] text-base font-bold'>{review.author_details.username}</p>
+                      </div>
+                      <p className='overflow-y-auto overflow-x-hidden text-[var(--color-primary)] text-base'>{review.content}</p>
+                    </div>
+                  )
+                  
+                })
+              }
+          </div>
         </div>
+        <div className="flex flex-col gap-5 px-10">
+          {
+            details.production_companies.length > 0 ? <h1 className='text-[var(--color-primary)] text-4xl font-bold'>Production Companies</h1> : ""
+          }
+          {
+            details.production_companies === null ? "" :
+            <div className="flex items-center gap-5">
+              {
+                details.production_companies.map((company,index) => {
+                return (
+                  <div key={index} className="">
+                    <img className="w-[8rem] h-auto" src={`${BASE_URL + company.logo_path}`} alt="" />
+                  </div>
+                  )
+                })
+              }
+              
+            </div>
+            
+          }
         </div>
     </div>
   )

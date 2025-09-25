@@ -25,7 +25,11 @@ export type DetailsType =  ListType &{
     original_title: string,
     original_name: string,
     seasons: BelongsToCollection[];
-    belongs_to_collection: BelongsToCollection | null
+    belongs_to_collection: BelongsToCollection | null,
+    production_companies : ProductionCompaniesType[]
+}
+export type ProductionCompaniesType = {
+    logo_path: string
 }
 export type BelongsToCollection = {
     poster_path : string

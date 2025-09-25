@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 
 export default function SeriesPage() {
     const { series, topRatedSeries ,seriesCategories } = useSelector((state: RootState) => state.movies);
-    console.log(series)
     const [filteredSeries,setFilteredSeries] = useState<ListTypeArray>(series)
 
   const merged = [...series, ...topRatedSeries].filter(

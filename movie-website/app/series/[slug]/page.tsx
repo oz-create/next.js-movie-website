@@ -21,7 +21,6 @@ export default function SerieDetails() {
           `https://api.themoviedb.org/3/tv/${serieId}?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`,
         );
         setSerieDetails(res.data);
-        console.log(res.data)
       } catch (error) {
         console.error("Veri çekme hatası:", error);
       }
