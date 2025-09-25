@@ -12,16 +12,31 @@ export type ListType = {
     adult: boolean;
     genre_ids: number[];
     name: string;
-    collection: CollectionType;
+    collection?: CollectionType;
 
 };
+
+export type GenresType = {
+    id: number,
+    name: string
+}
+export type DetailsType =  ListType &{
+    genres : GenresType[],
+    original_title: string,
+    original_name: string,
+    seasons: BelongsToCollection[];
+    belongs_to_collection: BelongsToCollection | null
+}
+export type BelongsToCollection = {
+    poster_path : string
+}
 export type SimilarType = {
   id: number;
   name: string;
   poster_path: string | null;
   overview: string;
   title: string;
-  // ihtiyacına göre ekle
+
 };
 
 export type ListTypeArray = ListType[]

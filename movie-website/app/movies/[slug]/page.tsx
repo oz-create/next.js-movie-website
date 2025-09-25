@@ -2,30 +2,46 @@
 
 import MovieSerieDetail from '@/components/MovieSerieDetail';
 import { RootState } from '@/store/store';
+import { DetailsType, ListType, SeriesType } from '@/types/type';
+import axios from 'axios';
 import { useParams } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux';
 
 export default function MovieDetails() {
-const { nowPlayingMovies,list,upcomingMovies } = useSelector((state: RootState) => state.movies);
-console.log(nowPlayingMovies)
-console.log(list)
+  const [movieDetails, setMovieDetails] = useState<DetailsType | null>(null);
 
-  const merged = [...nowPlayingMovies, ...list, ...upcomingMovies].filter(
-  (item, index, self) =>
-    index === self.findIndex((t) => t.id === item.id)
-  );
+  const param = useParams<{ slug: string }>();
+  const movieId = Number(param.slug); 
 
-console.log(merged);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`,
+        );
+        setMovieDetails(res.data);
+        console.log(res.data)
+      } catch (error) {
+        console.error("Veri çekme hatası:", error);
+      }
+    };
 
-const paramId = useParams()
+    fetchData();
+  }, [movieId]);
 
-const selectedMovie = merged.find((movie) => movie.id === Number(paramId.slug))
-console.log(selectedMovie)
+
 
   return (
     <div>
-        {selectedMovie && <MovieSerieDetail selectedType="movie" selected={selectedMovie}/>}
+      {
+         movieDetails &&
+        <MovieSerieDetail
+          selectedType="movie"
+          details={movieDetails}
+        />
+      }
+     
     </div>
   )
 }

@@ -2,28 +2,46 @@
 
 import MovieSerieDetail from '@/components/MovieSerieDetail';
 import { RootState } from '@/store/store';
-import { useParams } from 'next/navigation';
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { DetailsType, ListType, SeriesType } from '@/types/type';
+import axios from 'axios';
+import { useParams } from 'next/navigation'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux';
 
 export default function SerieDetails() {
-const { series,topRatedSeries } = useSelector((state: RootState) => state.movies);
-const paramId = useParams()
+  const [serieDetails, setSerieDetails] = useState<DetailsType | null>(null);
 
-const merged = [...series, ...topRatedSeries].filter(
-(item, index, self) =>
-  index === self.findIndex((t) => t.id === item.id)
-);
-console.log(series)
-console.log(topRatedSeries)
-console.log(merged)
+  const param = useParams<{ slug: string }>();
+  const serieId = Number(param.slug); 
 
-const selectedSerie = merged.find((serie) => serie.id === Number(paramId.slug))
-console.log(selectedSerie)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/tv/${serieId}?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`,
+        );
+        setSerieDetails(res.data);
+        console.log(res.data)
+      } catch (error) {
+        console.error("Veri çekme hatası:", error);
+      }
+    };
+
+    fetchData();
+  }, [serieId]);
+
+
 
   return (
     <div>
-        {selectedSerie && <MovieSerieDetail selectedType="serie" selected={selectedSerie}/>}
+      {
+         serieDetails &&
+        <MovieSerieDetail
+          selectedType="serie"
+          details={serieDetails}
+        />
+      }
+     
     </div>
   )
 }
