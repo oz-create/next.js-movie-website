@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import MovieInfo from './MovieInfo';
 import MovieCard from './MovieCard';
 import { CollectionType, SeriesType } from '@/types/type';
+import Link from 'next/link';
 
 export default function CollectionSeasonDetails({ selected, selectedType }:{ selected?: CollectionType | SeriesType, selectedType: "collection" | "season"}) {
     console.log(selected)
@@ -25,15 +26,25 @@ export default function CollectionSeasonDetails({ selected, selectedType }:{ sel
         </div>
        
         <div className='flex items-center justify-center flex-wrap gap-5 p-10 pt-20'>
-           {
+          {
             selectedType === "collection"
                 ? (selected as CollectionType).parts.map((movie, index) => (
-                    <MovieCard key={index} imageUrl={movie.poster_path ? BASE_URL + movie.poster_path : ""} />
-                    ))
-                : (selected as SeriesType).seasons.map((movie, index) => (
-                <MovieCard key={index} imageUrl={movie.poster_path ? BASE_URL + movie.poster_path : ""} />
+                    <Link href={`/movies/${movie.id}`} key={index}>
+                    <MovieCard imageUrl={movie.poster_path ? BASE_URL + movie.poster_path : null} />
+                    </Link>
+                ))
+                : (selected as SeriesType).seasons.map((season, index) => (
+                    <Link
+                    href={`/seasons/${selected?.id}/${season.season_number}`} // burada season_number kullan
+                    key={index}
+                    >
+                    <MovieCard
+                        imageUrl={season.poster_path ? BASE_URL + season.poster_path : null}
+                    />
+                    </Link>
                 ))
             }
+
 
         
         </div>

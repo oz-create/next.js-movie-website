@@ -77,7 +77,9 @@ export type SeriesType = ListType &{
 }
 
 export type PartType = {
-    poster_path : string | null
+    poster_path : string | null,
+    id: number,
+    season_number: number
 }
 
 export type ReviewType = {
