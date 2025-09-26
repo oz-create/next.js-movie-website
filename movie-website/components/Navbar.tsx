@@ -25,7 +25,7 @@ export default function Navbar() {
     { href: "/#pricing", label: "Pricing" },
     { href: "/movies", label: "Movies" },
     { href: "/series", label: "Series" },
-    { href: "/collection", label: "Collection" },
+    { href: "/collection", label: "Collection/Seasons" },
     { href: `${pathname}/#faq`, label: "FAQ" },
   ];
   return (

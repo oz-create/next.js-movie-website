@@ -9,7 +9,10 @@ export default function MovieInfo({title,description,rating} : MovieInfoType) {
     <div className='flex flex-col gap-2 relative z-1'>
         <h1 className='text-[var(--color-primary)] text-5xl font-bold drop-shadow-[0_0_5px_var(--light-color)]'>{title}</h1>
         <p className='font-bold text-[var(--color-primary)] text-base drop-shadow-[0_0_5px_var(--light-color)]'>{description}</p>
-        <div className='flex items-center gap-2'>
+        {
+          rating !== 0 ?
+
+      <div className='flex items-center gap-2'>
           <Rating
                 name="customized-10"
                 value={rating > 5 ? rating/2 : rating}
@@ -17,8 +20,12 @@ export default function MovieInfo({title,description,rating} : MovieInfoType) {
                 precision={0.5}
                 max={5}
             />
+            
             <span className='text-base text-[var(--color-primary)] drop-shadow-[0_0_5px_var(--light-color)]'>{rating > 5 ? (rating/2).toFixed(1) : rating.toFixed(1)}</span>
         </div>
+        : ""
+        }
+    
         
         <div className="flex items-center gap-3">
             <button className='text-base text-[var(--color-primary)] border-2 border-transparent bg-[var(--primary-blue)] py-3 px-5 rounded-full hover:border-[var(--primary-blue)] hover:bg-transparent transition-all'>Watch Movie</button>

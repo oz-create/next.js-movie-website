@@ -263,6 +263,7 @@ type initialStateType = {
   topRatedSeries: SeriesType[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
+  collectionSeasonState: boolean;
 };
 
 
@@ -280,13 +281,18 @@ const initialState: initialStateType = {
     topRatedSeries: [],
     status: "idle",
     error: null,
+    collectionSeasonState : true,
 }
 
 
 const moviesSlice = createSlice({
     name: "movies",
     initialState,
-    reducers: {},
+    reducers: {
+      handleCollectionSeason : (state) => {
+         state.collectionSeasonState = !state.collectionSeasonState
+      }
+    },
     extraReducers: (builder) => {
     builder
       .addCase(fetchMoviesCategories.pending, (state) => {
@@ -392,4 +398,5 @@ const moviesSlice = createSlice({
   },
 })
 
+export const { handleCollectionSeason } = moviesSlice.actions;
 export default moviesSlice.reducer;
