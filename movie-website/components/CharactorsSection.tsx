@@ -16,7 +16,7 @@ export default function CharactorsSection() {
                 people.map((person) => (
                     <Link href={`/charactors/${person.id}`} key={person.id}>
                         <div className='w-[5.5rem] h-[5.5rem] rounded-full overflow-hidden cursor-pointer hover:scale-105 transition-all'>
-                            <img src={BASE_URL + person.profile_path} alt={person.name} className='object-cover'/>
+                            <img src={person.profile_path !== null ?BASE_URL + person.profile_path : "/user.jpg"} alt={person.name} className='object-cover'/>
                         </div>  
                     </Link>
                                    

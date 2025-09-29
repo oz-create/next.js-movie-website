@@ -48,8 +48,7 @@ export default function Navbar() {
       </div>
       <div className='flex items-center justify-center gap-8 z-10'>
         <CiSearch className='text-[var(--color-primary)] w-8 h-8 object-cover'/>
-        <IoIosNotifications className='text-[var(--color-primary)] w-8 h-8 object-cover' />
-        <FaUser className='text-[var(--color-primary)] w-6 h-6 object-cover' />
+       
         {
           mode === "light" ? <IoSunny className='text-[var(--color-primary)] w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} /> :
           <IoMdMoon className='text-[var(--color-primary)] w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} />

@@ -112,3 +112,14 @@ export type EpisodeType = {
     name: string,
     id: number
 }
+export type PersonType = {
+    profile_path: string | null,
+    name: string,
+    birthday: string | null,
+    biography: string | null,
+    place_of_birth: string | null,
+    profiles: ProfileType[]
+}
+export type ProfileType = {
+    file_path: string
+}
