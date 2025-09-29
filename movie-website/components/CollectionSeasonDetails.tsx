@@ -5,7 +5,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import MovieInfo from './MovieInfo';
 import MovieCard from './MovieCard';
-import { CollectionType, SeriesType } from '@/types/type';
+import { CollectionType, SeasonType, SeriesType } from '@/types/type';
 import Link from 'next/link';
 
 export default function CollectionSeasonDetails({ selected, selectedType }:{ selected?: CollectionType | SeriesType, selectedType: "collection" | "season"}) {
@@ -35,7 +35,7 @@ export default function CollectionSeasonDetails({ selected, selectedType }:{ sel
                 ))
                 : (selected as SeriesType).seasons.map((season, index) => (
                     <Link
-                    href={`/seasons/${selected?.id}/${season.season_number}`} // burada season_number kullan
+                    href={`/seasons/${selected?.id}/${season.season_number}`}
                     key={index}
                     >
                     <MovieCard

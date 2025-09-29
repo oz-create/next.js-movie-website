@@ -77,9 +77,9 @@ export default function CollectionPage() {
               
               ))
              :
-                 series.map((movie,index) => (
-                  <Link href={`/seasons/${movie.id}`} key={index}>
-                    <CollectionCard imageUrl={BASE_URL + movie.poster_path} parts={movie.seasons}/>
+                 series.map((serie,index) => (
+                  <Link href={`/seasons/${serie.id}`} key={index}>
+                    <CollectionCard imageUrl={BASE_URL + serie.poster_path} parts={serie.seasons}/>
                   </Link>
                 
                 ))

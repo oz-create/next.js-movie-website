@@ -32,7 +32,8 @@ export type ProductionCompaniesType = {
     logo_path: string
 }
 export type BelongsToCollection = {
-    poster_path : string
+    poster_path : string,
+    id: number
 }
 export type SimilarType = {
   id: number;
@@ -95,4 +96,19 @@ export type AuthorDetails = {
     username: string,
     avatar_path: string | null,
     rating: number
+}
+export type SeasonType = {
+    id: number,
+    season: string,
+    backdrop_path: string,
+    name: string,
+    vote_average: number,
+    overview: string,
+    poster_path: string,
+    episodes: EpisodeType[]
+}
+export type EpisodeType = {
+    still_path: string,
+    name: string,
+    id: number
 }

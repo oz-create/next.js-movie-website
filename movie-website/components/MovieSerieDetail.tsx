@@ -12,6 +12,7 @@ import MovieCard from "./MovieCard";
 export default function MovieSerieDetail({details,selectedType}:{details: DetailsType, selectedType: string}){
 
     const [similar, setSimilar] = useState<ListType[] | SeriesType[]>([]);
+    console.log("details:",details)
     
 
     useEffect(() => {
@@ -63,11 +64,13 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
               <div className='flex gap-5 py-5 mx-10'>
                 {
                  details?.seasons.map((season, index) => (
-                    <div
-                    key={index}
+                  <Link key={index} href={"/seasons/"+ details.id + "/" + (index+1)}>
+                   <div
                     className="min-w-40 h-60 bg-cover bg-center rounded-lg shadow-lg"
                     style={{ backgroundImage: `url(${BASE_URL + season.poster_path})` }}
-                />
+                  />
+                  </Link>
+                   
                 )) 
                 }
                   
