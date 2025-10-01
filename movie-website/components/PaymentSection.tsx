@@ -7,7 +7,7 @@ import { MdShoppingBag } from "react-icons/md";
 export default function PaymentSection() {
     const { mode } = useSelector((state: RootState) => state.theme);
   return (
-    <div className='flex items-center justify-center gap-10' id='pricing'>
+    <div className='flex items-center justify-center lg:gap-10 ga-0 flex-col lg:flex-row lg:my-0 my-20' id='pricing'>
         <div className='flex flex-col justify-center items-center gap-20 bg-contain bg-no-repeat bg-center w-[20rem] h-[33rem]'
         style={{backgroundImage: `url(${mode === 'light' ? '/dark-mini-subtract.png' : '/light-mini-subtract.png'})`}}>
             <div className='flex flex-col justify-center items-center gap-3'>

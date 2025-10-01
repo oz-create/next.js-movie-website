@@ -16,7 +16,7 @@ export default function SelectMenu({ label, data, setSelected } : {label: string
     //filter()
   };
   return (
-     <Box sx={{ minWidth: 198 }} className="">
+     <Box sx={{ minWidth: 198 }} className="w-full md:w-auto">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label"
         sx={{

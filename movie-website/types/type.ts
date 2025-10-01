@@ -29,7 +29,8 @@ export type DetailsType =  ListType &{
     production_companies : ProductionCompaniesType[]
 }
 export type ProductionCompaniesType = {
-    logo_path: string
+    logo_path: string,
+    name: string
 }
 export type BelongsToCollection = {
     poster_path : string,

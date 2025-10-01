@@ -14,14 +14,14 @@ export default function CollectionSection() {
 
   return (
     <section className='flex flex-col gap-10 mx-10 my-20'>
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-between flex-col lg:flex-row lg:gap-0 gap-10">
           {
             collectionSeasonState ?
             <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Collection</h1>
             :
             <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Seasons</h1>
           }
-          <div className='flex items-center gap-5'>
+          <div className='flex items-center gap-5 lg:justify-center justify-between lg:w-auto w-full'>
             <SwitchButton option1='Movies' option2='Series' state={collectionSeasonState} switchFunction={() => dispatch(handleCollectionSeason())}/>
             <SeeMoreButton link={"/collection"}/>
           </div>

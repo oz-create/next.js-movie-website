@@ -113,16 +113,16 @@ export default function AdvanceSearch({filterData,setFilterData,searchName,categ
     const yesNoArray = ["All","Yes","No"]
     const ratingArray = ["All","4+","3-4","2-3","2-1"]
   return (
-    <div className='border border-[var(--primary-blue)] rounded-3xl relative h-[20rem] mt-20 mb-10 p-10 flex flex-col items-center justify-center'>
-        <div className='text-2xl text-[var(--color-primary)] absolute top-[-3.5rem] left-5 w-[15rem] h-[3.5rem] bg-[url("/blue-clip.png")] bg-cover bg-no-repeat bg-top flex justify-center items-center'>Advance Search</div>
-          <div className='flex flex-col items-center justify-center gap-10'>
-              <img src="/search-logo.png" alt="search image" className='w-[14rem] absolute left-5 top-5' />
-              <div className='flex items-center justify-center gap-5'>
+    <div className='border border-[var(--primary-blue)] rounded-3xl relative h-auto w-full mt-20 mb-10 p-10 flex flex-col items-center justify-center'>
+        <div className='text-2xl text-[var(--color-primary)] absolute top-[-3.5rem] left-5 max-w-[15rem] w-full h-[3.5rem] bg-[url("/blue-clip.png")] bg-cover bg-no-repeat bg-top flex justify-center items-center'>Advance Search</div>
+          <div className='w-full flex flex-col items-center justify-center gap-10'>
+              <img src="/search-logo.png" alt="search image" className='w-[14rem] absolute left-5 top-5 hidden xl:block' />
+              <div className='flex items-center justify-center gap-5 md:flex-row flex-col w-full'>
                   <SelectMenu label="Date" data={dateArray} setSelected={setSelectedDate}/>
                   <SelectMenu label="Adult" data={yesNoArray} setSelected={setSelectedAdult}/>
                   <SelectMenu label="Rating" data={ratingArray} setSelected={setSelectedRating}/>
               </div>
-              <div className='relative w-[40rem] h-[3rem] border rounded-xl flex items-center border-[var(--primary-blue)]'>
+              <div className='relative max-w-[40rem] w-full h-[3rem] border rounded-xl flex items-center border-[var(--primary-blue)]'>
                     <input onChange={(e) => handleSearch(e)} type="text" placeholder={"Search" + " "+ searchName} className='absolute w-full h-full left-0 pr-12 pl-3 text-[var(--color-primary)] outline-0'/>
                     <CiSearch className='text-[var(--color-primary)] w-8 h-8 object-cover absolute right-2 cursor-pointer'/>
               </div>

@@ -27,10 +27,10 @@ export default function MovieInfo({title,description,rating} : MovieInfoType) {
         }
     
         
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
             <button className='text-base text-[var(--color-primary)] border-2 border-transparent bg-[var(--primary-blue)] py-3 px-5 rounded-full hover:border-[var(--primary-blue)] hover:bg-transparent transition-all'>Watch Movie</button>
             <button className='text-base text-[var(--color-primary)] border-2 border-[var(--primary-blue)] py-3 px-5 rounded-full hover:border-transparent hover:bg-[var(--primary-blue)] transition-all'>More Info</button>
-        </div>
+        </div> */}
         
     </div>
   )

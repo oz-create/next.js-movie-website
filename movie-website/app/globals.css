@@ -52,14 +52,52 @@ html{
     top: 0;
     left: 0;
     border: 0.2rem solid transparent;
-    background: linear-gradient(to left,
-  rgba(34, 142, 229, 1) 0%,
-  rgba(34, 142, 229, 0.18) 28%,
-  rgba(34, 142, 229, 0.14) 74%,
-  rgba(34, 142, 229, 1) 100%) border-box;
+    background: linear-gradient(
+      to left,
+      rgba(34, 142, 229, 1) 0%,
+      rgba(34, 142, 229, 0.18) 28%,
+      rgba(34, 142, 229, 0.14) 74%,
+      rgba(34, 142, 229, 1) 100%
+    ) border-box;
+
+    /* Masking for transparent center */
     -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
+    -webkit-mask-composite: xor; /* Safari */
+    mask-composite: exclude;     /* Standard */
+  }
+
+  @media (max-width: 64rem) {
+    .navMenu::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+      top: 0;
+      left: 0;
+      border: 0.2rem solid transparent;
+      background: linear-gradient(
+        to left,
+        rgba(34, 142, 229, 1) 0%,
+        rgba(34, 142, 229, 0.18) 28%,
+        rgba(34, 142, 229, 0.14) 74%,
+        rgba(34, 142, 229, 1) 100%
+      ) border-box;
+
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
   }
 }
 
-
+@media (max-width: 1000px) {
+  html{
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  html{
+    font-size: 13px;
+  }
+}

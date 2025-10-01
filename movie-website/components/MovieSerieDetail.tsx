@@ -153,12 +153,16 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
           }
           {
             details.production_companies === null ? "" :
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5 overflow-x-auto">
               {
                 details.production_companies.map((company,index) => {
                 return (
-                  <div key={index} className="">
-                    <img className="w-[8rem] h-auto" src={`${BASE_URL + company.logo_path}`} alt="" />
+                  <div key={index}>
+                    {
+                      company.logo_path !== null ?  <img className="w-[8rem] h-auto" src={`${BASE_URL + company.logo_path}`} alt="" />
+                      : <p className="text-base capitalize text-[var(--color-primary)]">{company.name}</p>
+                    }
+                   
                   </div>
                   )
                 })
