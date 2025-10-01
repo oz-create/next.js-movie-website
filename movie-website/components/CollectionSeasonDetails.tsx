@@ -1,11 +1,8 @@
 import { BASE_URL } from '@/config/constants';
-import { RootState } from '@/store/store';
-import { useParams } from 'next/navigation';
 import React from 'react'
-import { useSelector } from 'react-redux';
 import MovieInfo from './MovieInfo';
 import MovieCard from './MovieCard';
-import { CollectionType, SeasonType, SeriesType } from '@/types/type';
+import { CollectionType, SeriesType } from '@/types/type';
 import Link from 'next/link';
 
 export default function CollectionSeasonDetails({ selected, selectedType }:{ selected?: CollectionType | SeriesType, selectedType: "collection" | "season"}) {

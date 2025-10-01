@@ -4,8 +4,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CiSearch } from "react-icons/ci";
-import { IoIosNotifications } from "react-icons/io";
-import { FaUser } from "react-icons/fa";
 import { IoSunny } from "react-icons/io5";
 import { IoMdMoon } from "react-icons/io";
 import { usePathname } from 'next/navigation';

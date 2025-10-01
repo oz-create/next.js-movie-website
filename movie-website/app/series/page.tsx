@@ -6,21 +6,24 @@ import { BASE_URL } from '@/config/constants';
 import { RootState } from '@/store/store';
 import { ListTypeArray } from '@/types/type';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux';
 
 export default function SeriesPage() {
     const { series, topRatedSeries ,seriesCategories } = useSelector((state: RootState) => state.movies);
     const [filteredSeries,setFilteredSeries] = useState<ListTypeArray>(series)
 
-  const merged = [...series, ...topRatedSeries].filter(
-  (item, index, self) =>
-    index === self.findIndex((t) => t.id === item.id)
-  );
+  const merged = useMemo(() => {
+    return [...series, ...topRatedSeries].filter(
+      (item, index, self) =>
+        index === self.findIndex((t) => t.id === item.id)
+    );
+  }, [series, topRatedSeries]);
 
-    useEffect(() => {
-      setFilteredSeries(merged)
-    }, [series, topRatedSeries])
+  useEffect(() => {
+    setFilteredSeries(merged);
+  }, [merged]);
+
     
   return (
     <div className='pt-40 px-10'>

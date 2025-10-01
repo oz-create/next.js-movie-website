@@ -1,5 +1,4 @@
 import React from 'react'
-import MovieInfo from './MovieInfo'
 import MovieSlider from './MovieSlider'
 
 

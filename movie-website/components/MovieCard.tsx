@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react'
 import { FaPlus } from "react-icons/fa";
 
@@ -8,8 +9,8 @@ export default function MovieCard({imageUrl}: {imageUrl: string | null}) {
             <FaPlus className='text-white text-3xl'/>
         </div>
         {
-          imageUrl !== null ?  <img src={imageUrl} alt="Movie Poster" className='w-full h-full object-cover'/>
-          : <img src="" alt="Movie Poster" className='w-full h-full object-cover'/>
+          imageUrl !== null ? <Image src={imageUrl} alt="Movie Poster" className='w-full h-full object-cover' width={150} height={150}/>
+          : <Image src="" alt="Movie Poster" className='w-full h-full object-cover' width={150} height={150}/>
         }
        
     </div>

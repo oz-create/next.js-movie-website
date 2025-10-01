@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import MovieCard from './MovieCard'
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
@@ -24,19 +24,20 @@ export default function MoviesSection() {
       return genreIds.includes(selectedCategory);
     }
 
-    const filter = () => {
-      const filtered = nowPlayingMovies.filter((element) => {
-        const categoryCheck = checkCategory(element.genre_ids)
-        return categoryCheck;
-      });
+   const filter = useCallback(() => {
+    const filtered = nowPlayingMovies.filter((element) => {
+      const categoryCheck = checkCategory(element.genre_ids)
+      return categoryCheck;
+    });
 
-      setFilterData(filtered);
-    };
+    setFilterData(filtered);
+  }, [nowPlayingMovies, selectedCategory]);
+
 
 
     useEffect(() => {
-      filter()
-    }, [selectedCategory])
+      filter();
+    }, [filter]);
 
   return (
     <section className='flex flex-col gap-10 mx-10 my-20'>

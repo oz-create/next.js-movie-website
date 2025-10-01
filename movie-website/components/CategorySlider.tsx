@@ -1,9 +1,9 @@
 import { CategoriesTypeArray, ListTypeArray } from "@/types/type";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
 
-export default function CategorySlider({ data,setSelected,categories }: { data: ListTypeArray,setSelected: React.Dispatch<React.SetStateAction<any>>, categories: CategoriesTypeArray }) {
+export default function CategorySlider({ data,setSelected,categories }: { data: ListTypeArray,setSelected: React.Dispatch<React.SetStateAction<number | null>>, categories: CategoriesTypeArray }) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [scrollX, setScrollX] = useState(0);
   const [activeId, setActiveId] = useState<number | null>(null);
@@ -43,7 +43,7 @@ export default function CategorySlider({ data,setSelected,categories }: { data: 
   };
   const selectCategory = (id: number | null) => {
     setActiveId((prev: number | null) => prev === id ? null : id)
-    setSelected((prev: number) => prev === id ? null : id)
+    setSelected((prev: number | null) => prev === id ? null : id)
   }
 
   return (

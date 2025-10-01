@@ -1,5 +1,5 @@
 import { AppDispatch, RootState } from '@/store/store';
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { BASE_URL } from '@/config/constants';
 import CollectionCard from './CollectionCard';

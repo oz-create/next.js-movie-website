@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import MovieCard from './MovieCard'
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
@@ -24,20 +24,20 @@ export default function SeriesSection() {
         if (selectedCategory === null) return true;
         return genreIds.includes(selectedCategory);
       }
-  
-      const filter = () => {
+
+        const filter = useCallback(() => {
         const filtered = series.filter((element) => {
           const categoryCheck = checkCategory(element.genre_ids)
           return categoryCheck;
         });
-  
+    
         setFilterData(filtered);
-      };
-  
-  
-      useEffect(() => {
-        filter()
-      }, [selectedCategory])
+      }, [selectedCategory]);
+      
+
+        useEffect(() => {
+          filter();
+        }, [filter]);
 
 
   return (

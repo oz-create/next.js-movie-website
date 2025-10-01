@@ -3,7 +3,6 @@
 import { BASE_URL } from '@/config/constants';
 import { PersonType } from '@/types/type';
 import axios from 'axios';
-import { url } from 'inspector';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -53,7 +52,7 @@ export default function CharactorsPage() {
                     {
                     personImages &&  personImages.profiles.map((image,index) => {
                             return (
-                                <div className='min-w-[20rem] w-[20rem] h-[20rem] bg-cover bg-center' style={{backgroundImage:` url(${image.file_path !== null ? BASE_URL + image.file_path : "/user.jpg"})`}}></div>
+                                <div key={index} className='min-w-[20rem] w-[20rem] h-[20rem] bg-cover bg-center' style={{backgroundImage:` url(${image.file_path !== null ? BASE_URL + image.file_path : "/user.jpg"})`}}></div>
                             )
                         })
                     }

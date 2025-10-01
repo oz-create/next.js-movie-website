@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { BASE_URL } from '@/config/constants'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function CharactorsSection() {
 
@@ -16,7 +17,7 @@ export default function CharactorsSection() {
                 people.map((person) => (
                     <Link href={`/charactors/${person.id}`} key={person.id}>
                         <div className='w-[5.5rem] h-[5.5rem] rounded-full overflow-hidden cursor-pointer hover:scale-105 transition-all'>
-                            <img src={person.profile_path !== null ?BASE_URL + person.profile_path : "/user.jpg"} alt={person.name} className='object-cover'/>
+                            <Image src={person.profile_path !== null ?BASE_URL + person.profile_path : "/user.jpg"} alt={person.name} className='object-cover w-full h-full' width={100} height={100}/>
                         </div>  
                     </Link>
                                    

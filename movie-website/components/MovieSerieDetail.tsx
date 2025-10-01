@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import MovieCard from "./MovieCard";
+import Image from "next/image";
 
 
 export default function MovieSerieDetail({details,selectedType}:{details: DetailsType, selectedType: string}){
@@ -28,7 +29,7 @@ export default function MovieSerieDetail({details,selectedType}:{details: Detail
     };
 
     fetchData();
-  }, [details.id]);
+  }, [details.id, selectedType]);
 
 
 const [reviews, setReviews] = useState<ReviewType[]>([]);
@@ -133,8 +134,8 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
                         <div className='bg-[var(--color-primary)] w-[3rem] h-[3rem] rounded-full overflow-hidden'>
                           {
                             review.author_details.avatar_path !== null ?
-                            <img src={BASE_URL + review.author_details.avatar_path} alt="" className='object-cover object-center' />
-                            : <img src="/user.jpg" alt="" />
+                            <Image src={BASE_URL + review.author_details.avatar_path} alt="" className='object-cover object-center' width={50} height={50}/>
+                            : <Image src="/user.jpg" alt="user" width={50} height={50}/>
                           }
                         </div>
                         <p className='text-[#808080] text-base font-bold'>{review.author_details.username}</p>
@@ -159,7 +160,7 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
                 return (
                   <div key={index}>
                     {
-                      company.logo_path !== null ?  <img className="w-[8rem] h-auto" src={`${BASE_URL + company.logo_path}`} alt="" />
+                      company.logo_path !== null ? <Image className="w-[8rem] h-auto" src={`${BASE_URL + company.logo_path}`} alt="" width={50} height={50}/>
                       : <p className="text-base capitalize text-[var(--color-primary)]">{company.name}</p>
                     }
                    

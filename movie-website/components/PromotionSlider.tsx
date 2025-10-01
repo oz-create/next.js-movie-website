@@ -1,9 +1,8 @@
-import { RootState } from '@/store/store';
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { BASE_URL } from '@/config/constants';
 import { ListTypeArray } from '@/types/type';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function PromotionSlider({ data, title, dataType }: { data: ListTypeArray , title: string, dataType: string}) {
 
@@ -52,13 +51,11 @@ export default function PromotionSlider({ data, title, dataType }: { data: ListT
         {/* Posters */}
         {data.map((movie, index) => (
           <Link href={`${dataType}/${movie.id}`} key={index} className='w-[14rem] absolute lg:right-20 right-auto lg:bottom-auto bottom-10'>
-            <img
-            src={BASE_URL + movie.poster_path}
+          <Image src={BASE_URL + movie.poster_path}
             alt="Upcoming movie"
-            className={`rounded-xl shadow-lg border-4 border-[var(--light-color)] transition-opacity duration-1000 ${
+            className={`w-full rounded-xl shadow-lg border-4 border-[var(--light-color)] transition-opacity duration-1000 ${
               index === selectedIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
-          />
+            }`} width={200} height={200}/>
           </Link>
           
         ))}

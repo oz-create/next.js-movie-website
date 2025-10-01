@@ -1,6 +1,5 @@
 "use client"
 
-import CollectionSeasonDetails from '@/components/CollectionSeasonDetails';
 import SeasonDetail from '@/components/SeasonDetail';
 import { SeasonType } from '@/types/type';
 import axios from 'axios';

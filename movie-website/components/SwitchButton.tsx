@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 type SwitchButtonPropsType = {
     option1: string;

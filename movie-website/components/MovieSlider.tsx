@@ -3,6 +3,7 @@ import MovieInfo from './MovieInfo'
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { BASE_URL } from '@/config/constants';
+import Image from 'next/image';
 
 
 function MovieSlider() {
@@ -37,7 +38,7 @@ function MovieSlider() {
               {
                 list.slice(0,4).map((movie, index) => (
                   <div className={`w-[7.625rem] h-[7.625rem] cursor-pointer transition overflow-hidden rounded-xl border border-[var(--primary-blue)] mx-[-0.5rem] ${selectedMovie?.poster_path === movie.poster_path ? "scale-125 z-1" : "scale-100 z-0"}`} key={index} onClick={() => setSelectedIndex(index)}>
-                    <img key={index} src={BASE_URL + movie.poster_path} alt="" className='w-full object-cover' />
+                    <Image  key={index} src={BASE_URL + movie.poster_path} alt="" className='w-full object-cover' width={150} height={150}/>
                   </div>
                   
                 ))

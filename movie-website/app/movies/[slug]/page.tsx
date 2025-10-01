@@ -1,12 +1,11 @@
 "use client"
 
 import MovieSerieDetail from '@/components/MovieSerieDetail';
-import { RootState } from '@/store/store';
-import { DetailsType, ListType, SeriesType } from '@/types/type';
+import { DetailsType } from '@/types/type';
 import axios from 'axios';
 import { useParams } from 'next/navigation'
-import React, { useEffect, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+
 
 export default function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState<DetailsType | null>(null);

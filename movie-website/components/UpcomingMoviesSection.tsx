@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PromotionSlider from './PromotionSlider'
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';

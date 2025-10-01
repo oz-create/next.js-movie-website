@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import SelectMenu from './SelectMenu'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store/store';
 import { CiSearch } from 'react-icons/ci';
 import CategorySlider from './CategorySlider';
 import { CategoriesTypeArray, ListTypeArray } from '@/types/type';
+import Image from 'next/image';
 
 export default function AdvanceSearch({filterData,setFilterData,searchName,categories}:{filterData: ListTypeArray, setFilterData: React.Dispatch<React.SetStateAction<ListTypeArray>>,searchName:string, categories: CategoriesTypeArray}) {
 
@@ -96,7 +95,7 @@ export default function AdvanceSearch({filterData,setFilterData,searchName,categ
         const adultCheck = checkAdult(element.adult);
         const ratingCheck = checkRating(element.vote_average)
         const categoryCheck = checkCategory(element.genre_ids)
-        const titleCheck = searchName === "movie" ? checkSearch(element.title) : checkSearch(element.name)
+        const titleCheck = searchName === "movies" ? checkSearch(element.title) : checkSearch(element.name)
         return dateCheck && adultCheck && ratingCheck && categoryCheck && titleCheck;
       });
 
@@ -116,7 +115,7 @@ export default function AdvanceSearch({filterData,setFilterData,searchName,categ
     <div className='border border-[var(--primary-blue)] rounded-3xl relative h-auto w-full mt-20 mb-10 p-10 flex flex-col items-center justify-center'>
         <div className='text-2xl text-[var(--color-primary)] absolute top-[-3.5rem] left-5 max-w-[15rem] w-full h-[3.5rem] bg-[url("/blue-clip.png")] bg-cover bg-no-repeat bg-top flex justify-center items-center'>Advance Search</div>
           <div className='w-full flex flex-col items-center justify-center gap-10'>
-              <img src="/search-logo.png" alt="search image" className='w-[14rem] absolute left-5 top-5 hidden xl:block' />
+              <Image src="/search-logo.png" alt="search image" className='w-[14rem] h-auto absolute object-contain left-5 top-5 hidden xl:block' width={140} height={140} />
               <div className='flex items-center justify-center gap-5 md:flex-row flex-col w-full'>
                   <SelectMenu label="Date" data={dateArray} setSelected={setSelectedDate}/>
                   <SelectMenu label="Adult" data={yesNoArray} setSelected={setSelectedAdult}/>

@@ -6,6 +6,7 @@ import SwitchButton from '@/components/SwitchButton';
 import { BASE_URL } from '@/config/constants';
 import { handleCollectionSeason } from '@/store/slices/moviesSlice';
 import { AppDispatch, RootState } from '@/store/store';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,14 +48,14 @@ export default function CollectionPage() {
                       collectionSeasonState ?
                        collection.slice(0,4).map((movie, index) => (
                          <div className={`w-[7.625rem] h-[7.625rem] cursor-pointer transition overflow-hidden rounded-xl border border-[var(--primary-blue)] mx-[-0.5rem] ${selectedMovie?.poster_path === movie.poster_path ? "scale-125 z-1" : "scale-100 z-0"}`} key={index} onClick={() => setSelectedIndex(index)}>
-                           <img key={index} src={BASE_URL + movie.poster_path} alt="" className='w-full object-cover' />
+                          <Image key={index} src={BASE_URL + movie.poster_path} alt={movie.name} className='w-full object-cover' width={7} height={7}/>
                          </div>
                          
                        ))
                        :
                        series.slice(0,4).map((movie, index) => (
                          <div className={`w-[7.625rem] h-[7.625rem] cursor-pointer transition overflow-hidden rounded-xl border border-[var(--primary-blue)] mx-[-0.5rem] ${selectedMovie?.poster_path === movie.poster_path ? "scale-125 z-1" : "scale-100 z-0"}`} key={index} onClick={() => setSelectedIndex(index)}>
-                           <img key={index} src={BASE_URL + movie.poster_path} alt="" className='w-full object-cover' />
+                           <Image key={index} src={BASE_URL + movie.poster_path} alt={movie.name} className='w-full object-cover' width={7} height={7}/>
                          </div>
                          
                        ))
