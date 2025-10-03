@@ -12,6 +12,7 @@ import { RootState } from '@/store/store';
 import { toggleTheme } from '@/store/slices/themeSlice';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
+import SearchDrawer from './SearchDrawer';
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function Navbar() {
     };
   }, [toggleMenu]);
 
+
   const links = [
     { href: "/", label: "Home" },
     { href: "/#pricing", label: "Pricing" },
@@ -73,7 +75,9 @@ export default function Navbar() {
         
       </div>
       <div className='flex items-center justify-center gap-8 z-10'>
-        <CiSearch className='text-[var(--color-primary)] w-8 h-8 object-cover'/>
+        <SearchDrawer/> 
+        
+       
        
         {
           mode === "light" ? <IoSunny className='text-[var(--color-primary)] w-8 h-8 object-cover cursor-pointer' onClick={() => dispatch(toggleTheme())} /> :
