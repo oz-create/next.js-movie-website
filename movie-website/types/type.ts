@@ -51,6 +51,7 @@ export type MovieInfoType = {
     title: string; 
     description: string;
     rating: number;
+    url: string | null;
 }
 
 

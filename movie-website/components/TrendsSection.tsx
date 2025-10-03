@@ -14,7 +14,7 @@ export default function TrendsSection() {
     <section className='flex flex-col gap-10 mx-10 my-20'>
         <div className="w-full flex items-center justify-between">
           <h1 className='text-5xl text-[var(--color-primary)] font-bold'>Trends</h1>
-          <SeeMoreButton link="/trends" />
+          <SeeMoreButton link="/movies" />
         </div>
         <div className='flex items-center justify-start gap-5 overflow-x-auto overflow-y-hidden max-w-[100%] py-5 px-2'>
             {

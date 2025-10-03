@@ -1,10 +1,12 @@
 "use client"
 
+import { BASE_URL } from '@/config/constants'
 import { MovieInfoType } from '@/types/type'
 import { Rating } from '@mui/material'
+import Link from 'next/link'
 import React from 'react'
 
-export default function MovieInfo({title,description,rating} : MovieInfoType) {
+export default function MovieInfo({title,description,rating,url} : MovieInfoType) {
   return (
     <div className='flex flex-col gap-2 relative z-1'>
         <h1 className='text-[var(--color-primary)] text-5xl font-bold drop-shadow-[0_0_5px_var(--light-color)]'>{title}</h1>
@@ -27,10 +29,16 @@ export default function MovieInfo({title,description,rating} : MovieInfoType) {
         }
     
         
-        {/* <div className="flex items-center gap-3">
-            <button className='text-base text-[var(--color-primary)] border-2 border-transparent bg-[var(--primary-blue)] py-3 px-5 rounded-full hover:border-[var(--primary-blue)] hover:bg-transparent transition-all'>Watch Movie</button>
-            <button className='text-base text-[var(--color-primary)] border-2 border-[var(--primary-blue)] py-3 px-5 rounded-full hover:border-transparent hover:bg-[var(--primary-blue)] transition-all'>More Info</button>
-        </div> */}
+         <div className="flex items-center gap-3">
+            {/* <button className='text-base text-[var(--color-primary)] border-2 border-transparent bg-[var(--primary-blue)] py-3 px-5 rounded-full hover:border-[var(--primary-blue)] hover:bg-transparent transition-all'>Watch Movie</button> */}
+            {
+              url &&
+              <Link href={url}>
+                <button className='text-base text-[var(--color-primary)] border-2 border-[var(--primary-blue)] py-3 px-5 rounded-full hover:border-transparent hover:bg-[var(--primary-blue)] transition-all cursor-pointer'>More Info</button>
+              </Link>
+            }
+           
+        </div> 
         
     </div>
   )

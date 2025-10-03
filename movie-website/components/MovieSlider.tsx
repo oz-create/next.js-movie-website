@@ -33,7 +33,7 @@ function MovieSlider() {
             ? `url(${BASE_URL + selectedMovie.backdrop_path})`
             : 'none',
         }}>
-          <MovieInfo title={selectedMovie?.title || ""} description={selectedMovie?.overview || ""} rating={selectedMovie?.vote_average || 0} />
+          <MovieInfo title={selectedMovie?.title || ""} description={selectedMovie?.overview || ""} rating={selectedMovie?.vote_average || 0} url={`/movies/${selectedMovie?.id}`}/>
            <div className='flex items-center relative z-1'>
               {
                 list.slice(0,4).map((movie, index) => (

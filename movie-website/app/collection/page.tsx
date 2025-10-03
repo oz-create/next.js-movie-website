@@ -42,7 +42,7 @@ export default function CollectionPage() {
                    ? `url(${BASE_URL + selectedMovie.backdrop_path})`
                    : 'none',
                }}>
-                 <MovieInfo title={selectedMovie?.name || ""} description={selectedMovie?.overview || ""} rating={selectedMovie?.vote_average || 0} />
+                 <MovieInfo title={selectedMovie?.name || ""} description={selectedMovie?.overview || ""} rating={selectedMovie?.vote_average || 0} url={null} />
                   <div className='flex items-center relative z-1'>
                      {
                       collectionSeasonState ?

@@ -55,7 +55,7 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
            style={{
                backgroundImage: `url(${BASE_URL + details?.backdrop_path})`
             }}>
-          <MovieInfo title={`${selectedType === "movie" ? details?.title : details?.name}`} description={details?.overview} rating={details?.vote_average || 0} />
+          <MovieInfo title={`${selectedType === "movie" ? details?.title : details?.name}`} description={details?.overview} rating={details?.vote_average || 0} url={null}/>
         </div>
       
     </div>

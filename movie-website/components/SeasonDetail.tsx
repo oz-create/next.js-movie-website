@@ -17,7 +17,7 @@ export default function SeasonDetail({ selected }:{ selected?: SeasonType | unde
                 ? `url(${BASE_URL + selected.poster_path})`
                 : 'none',
             }}>
-            <MovieInfo title={selected?.name || ""} description={selected?.overview || ""} rating={selected?.vote_average || 0} />
+            <MovieInfo title={selected?.name || ""} description={selected?.overview || ""} rating={selected?.vote_average || 0} url={null}/>
 
         </div> 
         </div>
