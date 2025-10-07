@@ -1,10 +1,11 @@
 "use client"
 
 import AdvanceSearch from '@/components/AdvanceSearch'
-import MovieCard from '@/components/MovieCard';
+import CircularIndeterminate from '@/components/Loader';
 import { BASE_URL } from '@/config/constants';
 import { RootState } from '@/store/store';
 import { ListTypeArray } from '@/types/type';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux';
@@ -23,6 +24,11 @@ export default function SeriesPage() {
   useEffect(() => {
     setFilteredSeries(merged);
   }, [merged]);
+
+    const MovieCard = dynamic(() => import('@/components/MovieCard'), {
+      loading: () => <CircularIndeterminate />,
+      ssr: false, 
+    });
 
     
   return (

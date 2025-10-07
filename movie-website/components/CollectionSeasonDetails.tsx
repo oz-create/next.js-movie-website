@@ -6,7 +6,6 @@ import { CollectionType, SeriesType } from '@/types/type';
 import Link from 'next/link';
 
 export default function CollectionSeasonDetails({ selected, selectedType }:{ selected?: CollectionType | SeriesType, selectedType: "collection" | "season"}) {
-    console.log(selected)
    
   return (
     <div className=''>

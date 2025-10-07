@@ -13,7 +13,6 @@ export default function SeasonsDetailPage() {
     const seasonId = Number(param.slug); 
 
     const selectedSeason = series.find((serie) => serie.id == seasonId);
-    console.log(selectedSeason)
 
   return (
     <CollectionSeasonDetails selected={selectedSeason} selectedType='season'/>

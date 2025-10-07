@@ -13,8 +13,6 @@ import Image from "next/image";
 export default function MovieSerieDetail({details,selectedType}:{details: DetailsType, selectedType: string}){
 
     const [similar, setSimilar] = useState<ListType[] | SeriesType[]>([]);
-    console.log("details:",details)
-    
 
     useEffect(() => {
     const fetchData = async () => {

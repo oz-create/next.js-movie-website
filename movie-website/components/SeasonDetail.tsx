@@ -3,10 +3,11 @@ import React from 'react'
 import MovieInfo from './MovieInfo';
 import MovieCard from './MovieCard';
 import { SeasonType } from '@/types/type';
+import CircularIndeterminate from './Loader';
 
 export default function SeasonDetail({ selected }:{ selected?: SeasonType | undefined}) {
-    console.log(selected)
-    if(!selected) return <div>Loading...</div>;
+
+    if(!selected) return <CircularIndeterminate />;
    
   return (
     <div className=''>

@@ -3,6 +3,7 @@ import { BASE_URL } from '@/config/constants';
 import { ListTypeArray } from '@/types/type';
 import Link from 'next/link';
 import Image from 'next/image';
+import CircularIndeterminate from './Loader';
 
 export default function PromotionSlider({ data, title, dataType }: { data: ListTypeArray , title: string, dataType: string}) {
 
@@ -21,7 +22,7 @@ export default function PromotionSlider({ data, title, dataType }: { data: ListT
 
   
     if (!data || data.length === 0) {
-      return <p>Loading...</p>;
+      return <CircularIndeterminate />;
     }
 
   return (

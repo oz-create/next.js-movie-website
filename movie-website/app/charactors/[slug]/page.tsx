@@ -19,7 +19,6 @@ export default function CharactorsPage() {
                 `https://api.themoviedb.org/3/person/${personId}?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`,
               );
               setPersonDetails(res.data);
-              console.log(res.data)
             } catch (error) {
               console.error("Veri çekme hatası:", error);
             }
@@ -35,7 +34,6 @@ export default function CharactorsPage() {
                 `https://api.themoviedb.org/3/person/${personId}/images?api_key=274c12e6e2e4f9ca265a01d107280eba&language=en-US`,
               );
               setPersonImages(res.data);
-              console.log(res.data)
             } catch (error) {
               console.error("Veri çekme hatası:", error);
             }

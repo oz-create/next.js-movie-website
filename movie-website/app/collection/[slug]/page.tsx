@@ -13,7 +13,6 @@ export default function CollectionDetailPage() {
     const collectionId = Number(param.slug); 
 
     const selectedCollection = collection.find((collection) => collection.id == collectionId);
-    console.log(selectedCollection)
 
   return (
     <CollectionSeasonDetails selected={selectedCollection} selectedType='collection'/>
