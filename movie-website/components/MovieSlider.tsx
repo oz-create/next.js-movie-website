@@ -26,7 +26,7 @@ function MovieSlider() {
   const selectedMovie = movies[selectedIndex];
 
   return (
-    <div className='w-full flex  items-center justify-center relative'>
+    <div className='w-full flex  items-center justify-center relative overflow-hidden'>
       <div className='bg-cover bg-top w-full h-[50rem] flex lg:flex-row flex-col lg:items-end items-center lg:justify-between justify-end gap-10 p-10 transition-all before:content-[""] before:absolute before:w-full lg:before:h-[20rem] before:h-[40rem] before:-bottom-0 before:-left-0 before:-right-0 before:bg-gradient-to-t before:from-[var(--light-color)] before:to-transparent'
       style={{
           backgroundImage: selectedMovie?.backdrop_path
