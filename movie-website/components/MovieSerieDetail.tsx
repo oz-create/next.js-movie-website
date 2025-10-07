@@ -85,7 +85,7 @@ const [reviews, setReviews] = useState<ReviewType[]>([]);
                   
         }
       </div> 
-      <div className='flex items-center gap-5 p-10'>
+      <div className='flex items-center gap-5 mx-10 py-5 my-5 max-w-full overflow-x-auto overflow-y-hidden'>
           {
             details.genres.map((genre,index) => (
               <div key={index} className='py-3 px-5 border border-[var(--primary-blue)] rounded-full text-[var(--color-primary)] text-sm flex-shrink-0 bg-[var(--primary-blue)]'>
